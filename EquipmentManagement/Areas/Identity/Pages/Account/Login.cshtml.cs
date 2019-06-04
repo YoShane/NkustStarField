@@ -36,15 +36,17 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "學號欄位不可空白")]
+            [EmailAddress(ErrorMessage = "輸入格式有誤")]
+            [Display(Name = "學號")]
             public string Email { get; set; }
 
-            [Required]
-            [DataType(DataType.Password)]
+            [Required(ErrorMessage = "密碼欄位不可空白")]
+            [DataType(DataType.Password, ErrorMessage = "輸入格式有誤")]
+            [Display(Name = "密碼")]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "保持登入")]
             public bool RememberMe { get; set; }
         }
 
@@ -68,7 +70,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-
+            
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -90,7 +92,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "登入失敗，請重試!");
                     return Page();
                 }
             }

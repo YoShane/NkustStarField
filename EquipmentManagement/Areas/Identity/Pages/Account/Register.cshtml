@@ -1,37 +1,80 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "註冊";
 }
 
-<h1>@ViewData["Title"]</h1>
+@section CSS {
+    <link href="~/css/style2.css" rel='stylesheet' type='text/css' media="all" />
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+<div id="magrin"></div>
+
+<!-- title -->
+<h1>註冊帳號</h1>
+<!-- //title -->
+<!-- content -->
+<div class="sub-main-w3">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post" onsubmit="checkSingUp()">
+
+        <div class="form-style-agile">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" type="text" class="form-control" id="nname" onfocus="this.value = '';" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-style-agile">
+            <label asp-for="Input.Name"></label>
+            <input asp-for="Input.Name" class="form-control" id="chiname"  onfocus="this.value = '';" />
+            <span asp-validation-for="Input.Name" class="text-danger"></span>
+        </div>
+        <div class="form-style-agile">
+            <label asp-for="Input.Phone"></label>
+            <input asp-for="Input.Phone" type="tel" class="form-control" id="phone"  onfocus="this.value = '';" />
+            <span asp-validation-for="Input.Phone" class="text-danger"></span>
+        </div>
+        <div class="form-style-agile">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" type="password" class="form-control" placeholder="請輸入密碼" onfocus="this.value = '';" onblur="if (this.value == '') " id="upass" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-style-agile">
+            <label asp-for="Input.ConfirmPassword"></label>
+            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="請確認密碼" id="surenpass" onfocus="this.value = '';" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="form-style-agile">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+
+
+            <div class="wthree-text">
+                <ul>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">返回首頁</a>
+                    </li>
+                    <li>
+                        <a asp-area="Identity" asp-page="/Account/Login">已經有帳號了嗎?</a>
+                    </li>
+                </ul>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
+
+            <input type="submit" value="送出">
+
+    </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/assets/js/login.js"></script>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
 }
