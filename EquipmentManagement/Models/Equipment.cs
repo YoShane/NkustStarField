@@ -27,7 +27,7 @@ namespace EquipmentManagement.Models
         public string Source { get; set; }
 
         [Display(Name = "技術性工具")]
-        public int Special { get; set; }
+        public bool Special { get; set; }
 
         [Display(Name = "使用期限"), DataType(DataType.Date)]
         public DateTime Period_time { get; set; }

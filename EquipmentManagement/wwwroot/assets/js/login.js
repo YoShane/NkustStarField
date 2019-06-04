@@ -26,9 +26,6 @@ function chrakSingIn() {
         return false;
         event.preventDefault();
 
-    }else
-    {
-        alert("登入成功");
     }
    
 }

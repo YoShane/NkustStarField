@@ -61,7 +61,7 @@ namespace EquipmentManagement.Data.Migrations
 
                     b.Property<string>("Source");
 
-                    b.Property<int>("Special");
+                    b.Property<bool>("Special");
 
                     b.HasKey("Id");
 
@@ -93,7 +93,7 @@ namespace EquipmentManagement.Data.Migrations
 
                     b.Property<string>("Identity");
 
-                    b.Property<int>("Member_fee");
+                    b.Property<bool>("Member_fee");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50);

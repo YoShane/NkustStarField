@@ -4,64 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - EquipmentManagement</title>
-    <environment include="Development">
-        <link rel="stylesheet" href="~/assets/css/main.css" />
-    </environment>
+
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />@RenderSection("CSS", required: false)
 </head>
 
 
 <body>
-    <div class="page-wrap">
+    @RenderBody()
 
-        <!-- Nav -->
-        <nav id="nav">
-            <ul>
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Index">首頁</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Equipments" asp-action="Index">設備管理</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">租借管理</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Locations" asp-action="Index">存放設定</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">訂單查詢</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Members" asp-action="Index">使用者管理</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="About">關於</a>
-                </li>
-                <partial name="_LoginPartial" />
-            </ul>
-        </nav>
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/main.js"></script>@RenderSection("Scripts", required: false)
 
-        <!-- Main -->
-        <section id="main">
-            @RenderBody()
-
-            <footer id="footer">
-                <div class="copyright">
-                    2019 - 星野登山社 - <a asp-area="" asp-controller="Home" asp-action="About">關於我們</a>
-                </div>
-            </footer>
-
-        </section>
-    </div>
-
-    <environment include="Development">
-        <script src="~/assets/js/jquery.min.js"></script>
-        <script src="~/assets/js/jquery.poptrox.min.js"></script>
-        <script src="~/assets/js/jquery.scrolly.min.js"></script>
-        <script src="~/assets/js/skel.min.js"></script>
-        <script src="~/assets/js/util.js"></script>
-        <script src="~/assets/js/main.js"></script>
-    </environment>
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

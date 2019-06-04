@@ -24,7 +24,7 @@ namespace EquipmentManagement.Models
         public string Identity { get; set; }
 
         [Display(Name = "已繳社費")]
-        public int Member_fee { get; set; }
+        public bool Member_fee { get; set; }
 
         [Display(Name = "建立時間"), DataType(DataType.Date)]
         public DateTime CreateDate { get; set; }

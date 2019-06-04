@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li>
+            <a asp-area="" asp-controller="Home" asp-action="Index">首頁</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Equipments" asp-action="Index">設備管理</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">租借管理</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Locations" asp-action="Index">存放設定</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">訂單查詢</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Members" asp-action="Index">使用者</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Home" asp-action="About">關於</a>
+        </li>
+        @if (SignInManager.IsSignedIn(User)) {
+        <li>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="fa fa-sign-out">Logout</button>
+            </form>
+        </li>
+        } else {
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+        }
+    </ul>
+</nav>
