@@ -16,7 +16,7 @@
 <!-- //title -->
 <!-- content -->
 <div class="sub-main-w3">
-    <form asp-route-returnUrl="@Model.ReturnUrl" method="post" onsubmit="checkSingUp()">
+    <form  id="register" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
         <div class="form-style-agile">
             <label asp-for="Input.Email"></label>
@@ -35,7 +35,7 @@
         </div>
         <div class="form-style-agile">
             <label asp-for="Input.Password"></label>
-            <input asp-for="Input.Password" type="password" class="form-control" placeholder="請輸入密碼" onfocus="this.value = '';" onblur="if (this.value == '') " id="upass" />
+            <input asp-for="Input.Password" type="password" class="form-control" placeholder="請輸入密碼" onfocus="this.value = '';" onblur="if (this.value == '') " id="npass" />
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
         <div class="form-style-agile">
@@ -60,7 +60,7 @@
                 </ul>
             </div>
 
-            <input type="submit" value="送出">
+            <input type="submit" value="送出" form="#" onclick="checkSingUp()">
 
     </form>
 </div>

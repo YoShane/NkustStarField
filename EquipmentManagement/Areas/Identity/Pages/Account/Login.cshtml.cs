@@ -37,7 +37,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required(ErrorMessage = "學號欄位不可空白")]
-            [EmailAddress(ErrorMessage = "輸入格式有誤")]
+            [EmailAddress(ErrorMessage = " ")]
             [Display(Name = "學號")]
             public string Email { get; set; }
 
@@ -67,7 +67,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        /*public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             
@@ -99,6 +99,6 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
-        }*/
+        }
     }
 }

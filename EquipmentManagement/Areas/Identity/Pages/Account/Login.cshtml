@@ -16,7 +16,7 @@
         <!-- //title -->
         <!-- content -->
         <div class="sub-main-w3">
-            <form id="account" method="post" onsubmit="checkSingIn()">
+            <form id="account" method="post">
 
                 <div class="form-style-agile">
                     <input asp-for="Input.Email" class="form-control" type="text" placeholder="學號" onfocus="this.value = '';" onblur="if (this.value == '請輸入6-20位字元的帳號') " id="uname" />
@@ -53,7 +53,7 @@
                     </ul>
                 </div>
 
-                <input type="submit" value="登入">
+                <input type="submit" value="登入" form="#" onclick="checkSingIn()">
 
             </form>
         </div>

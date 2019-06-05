@@ -23,8 +23,7 @@ function checkSingIn() {
         event.preventDefault();
         return false;
     } 
-    var uidDomain = customizeDomain($("#uname").val());
-    $("#uname").val(uidDomain);
+    oUname.value = oUname.value + "＠nkust.edu.tw"
     $("#account").submit();
     return true;
 }
@@ -34,8 +33,8 @@ function checkSingUp() {
     var oUpass = document.getElementById("npass")
     var aUpass = document.getElementById("surenpass")
 
-    if (oUname.value.length > 20 || oUname.value.length < 6) {
-        alert("請輸入6-20位字元的學號");
+    if (oUname.value.length > 20 || oUname.value.length < 6 || oUname.value == "請輸入6-20位字元的帳號") {
+        alert("請輸入6-20位字元的帳號");
         event.preventDefault();
         return false;
     }
@@ -47,18 +46,16 @@ function checkSingUp() {
         return false;
         }
     
-    var uidDomain = customizeDomain($("#nname").val());
-    $("#nname").val(uidDomain);
-
-    if (oUpass.value.length > 20 || oUpass.value.length < 6) {
+    
+    if (oUpass.value.length > 20 || oUpass.value.length < 6 || upass.value == "請輸入6-20位字元的密碼") {
         alert("請輸入6-20位字元的密碼");
-    } else if (Chk(oUpass.value))
+    }else if(Chk(upass.value))
     {
         alert("密碼出現非法文字請檢查");
+
         event.preventDefault();
         return false;
     }
- 
     if(oUpass.value!=aUpass.value)
     {
         alert("與確認密碼不相符");
@@ -66,10 +63,10 @@ function checkSingUp() {
         return false;
     }
 
+
     if(checkPhone())
     {
-        if (ChkName())
-            $("#register").submit();
+        if(ChkName())
             return true;
     }
     
