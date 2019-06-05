@@ -1,83 +1,96 @@
 ﻿@model IEnumerable<EquipmentManagement.Models.Equipment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "器材總覽";
 }
 
-<h1>Index</h1>
+<div class="page-wrap">
+    <partial name="_Nav" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Img)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pirce_non_member)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price_member)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Source)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Special)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Period_time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Img)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pirce_non_member)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price_member)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Source)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Special)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Period_time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <!-- Main -->
+    <section id="main">
+        <div class="gallery">
+
+
+            <h1>登山社器材</h1>
+
+            <p>
+                <a asp-action="Create">新增器材</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Img)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Pirce_non_member)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Price_member)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Source)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Special)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Period_time)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Img)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pirce_non_member)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price_member)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Source)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Special)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Period_time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <partial name="_Footer" />
+    </section>
+</div>

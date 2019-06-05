@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "使用者資料";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
@@ -17,17 +17,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
-                @if (Model.IsEmailConfirmed)
-                {
+                @if (Model.IsEmailConfirmed) {
                     <div class="input-group">
                         <input asp-for="Input.Email" class="form-control" />
                         <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
                     </div>
-                }
-                else
-                {
+                } else {
                     <input asp-for="Input.Email" class="form-control" />
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">傳送驗證信</button>
                 }
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
@@ -36,7 +33,7 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+            <button id="update-profile-button" type="submit" class="btn btn-primary">儲存</button>
         </form>
     </div>
 </div>

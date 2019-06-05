@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+
 <!-- Nav -->
 <nav id="nav">
     <ul>
@@ -8,33 +9,40 @@
             <a asp-area="" asp-controller="Home" asp-action="Index">首頁</a>
         </li>
         <li>
-            <a asp-area="" asp-controller="Equipments" asp-action="Index">設備管理</a>
+            <a asp-area="" asp-controller="Equipments" asp-action="Index">器材瀏覽</a>
         </li>
-        <li>
-            <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">租借管理</a>
-        </li>
-        <li>
-            <a asp-area="" asp-controller="Locations" asp-action="Index">存放設定</a>
-        </li>
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) {
+            <li>
+                <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">租借管理</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Locations" asp-action="Index">存放設定</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Members" asp-action="Index">Users管理</a>
+            </li>
+        }
         <li>
             <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">訂單查詢</a>
         </li>
         <li>
-            <a asp-area="" asp-controller="Members" asp-action="Index">使用者</a>
+            <a asp-area="" asp-controller="Home" asp-action="About">關於本站</a>
         </li>
-        <li>
-            <a asp-area="" asp-controller="Home" asp-action="About">關於</a>
-        </li>
+
         @if (SignInManager.IsSignedIn(User)) {
-        <li>
-            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="fa fa-sign-out">Logout</button>
-            </form>
-        </li>
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index">帳戶</a>
+            </li>
+            <!--<form id="logout" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <li>
+                <a href="#" onclick="$('#logout').submit()">登出</a>
+            </li>
+        </form> -->
         } else {
-        <li>
-            <a asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
+            <li>
+                <a asp-area="Identity" asp-page="/Account/Login">登入</a>
+            </li>
         }
+
     </ul>
 </nav>

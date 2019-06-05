@@ -8,7 +8,6 @@ namespace EquipmentManagement.Models
         [Display(Name = "器材編號")]
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "器材照片")]
         public string Img { get; set; }
 

@@ -1,73 +1,84 @@
 ﻿@model EquipmentManagement.Models.Equipment
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "器材新增";
 }
 
-<h1>Create</h1>
+<div class="page-wrap">
+    <partial name="_Nav" />
 
-<h4>Equipment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Img" class="control-label"></label>
-                <input asp-for="Img" class="form-control" />
-                <span asp-validation-for="Img" class="text-danger"></span>
+    <!-- Main -->
+    <section id="main">
+        <div class="gallery">
+
+            <h1>新增新器材</h1>
+
+            <h4>Equipment</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Img" class="control-label"></label>
+                            <input asp-for="Img" class="form-control" />
+                            <span asp-validation-for="Img" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Quantity" class="control-label"></label>
+                            <input asp-for="Quantity" class="form-control" />
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Pirce_non_member" class="control-label"></label>
+                            <input asp-for="Pirce_non_member" class="form-control" />
+                            <span asp-validation-for="Pirce_non_member" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price_member" class="control-label"></label>
+                            <input asp-for="Price_member" class="form-control" />
+                            <span asp-validation-for="Price_member" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Source" class="control-label"></label>
+                            <input asp-for="Source" class="form-control" />
+                            <span asp-validation-for="Source" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Special" /> @Html.DisplayNameFor(model => model.Special)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Period_time" class="control-label"></label>
+                            <input asp-for="Period_time" class="form-control" />
+                            <span asp-validation-for="Period_time" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Location" class="control-label"></label>
+                            <input asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pirce_non_member" class="control-label"></label>
-                <input asp-for="Pirce_non_member" class="form-control" />
-                <span asp-validation-for="Pirce_non_member" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price_member" class="control-label"></label>
-                <input asp-for="Price_member" class="form-control" />
-                <span asp-validation-for="Price_member" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Source" class="control-label"></label>
-                <input asp-for="Source" class="form-control" />
-                <span asp-validation-for="Source" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Special" /> @Html.DisplayNameFor(model => model.Special)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Period_time" class="control-label"></label>
-                <input asp-for="Period_time" class="form-control" />
-                <span asp-validation-for="Period_time" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+        </div>
+        <partial name="_Footer" />
+    </section>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

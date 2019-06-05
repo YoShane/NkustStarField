@@ -33,20 +33,20 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "請驗證舊密碼")]
             [DataType(DataType.Password)]
-            [Display(Name = "Current password")]
+            [Display(Name = "目前的密碼")]
             public string OldPassword { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "請輸入新密碼")]
+            [StringLength(100, ErrorMessage = "密碼最低需6個字元", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "新密碼")]
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "確認新密碼")]
+            [Compare("NewPassword", ErrorMessage = "與前次密碼不同")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -56,12 +56,6 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            var hasPassword = await _userManager.HasPasswordAsync(user);
-            if (!hasPassword)
-            {
-                return RedirectToPage("./SetPassword");
             }
 
             return Page();
@@ -92,7 +86,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            StatusMessage = "您的密碼已成功變更";
 
             return RedirectToPage();
         }

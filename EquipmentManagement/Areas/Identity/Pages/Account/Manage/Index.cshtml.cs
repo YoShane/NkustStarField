@@ -27,6 +27,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
             _emailSender = emailSender;
         }
 
+        [Display(Name = "帳號")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -41,10 +42,11 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [EmailAddress]
+            [Display(Name = "常用電子郵件")]
             public string Email { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "手機號碼")]
             public string PhoneNumber { get; set; }
         }
 

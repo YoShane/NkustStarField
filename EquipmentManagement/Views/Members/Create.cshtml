@@ -1,58 +1,69 @@
 ﻿@model EquipmentManagement.Models.Member
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "建立使用者";
 }
 
-<h1>Create</h1>
+<div class="page-wrap">
+    <partial name="_Nav" />
 
-<h4>Member</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Stu_mail" class="control-label"></label>
-                <input asp-for="Stu_mail" class="form-control" />
-                <span asp-validation-for="Stu_mail" class="text-danger"></span>
+    <!-- Main -->
+    <section id="main">
+        <div class="gallery">
+
+            <h1>新增使用者</h1>
+
+            <h4>Member</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Stu_mail" class="control-label"></label>
+                            <input asp-for="Stu_mail" class="form-control" />
+                            <span asp-validation-for="Stu_mail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Phone" class="control-label"></label>
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Identity" class="control-label"></label>
+                            <input asp-for="Identity" class="form-control" />
+                            <span asp-validation-for="Identity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Member_fee" /> @Html.DisplayNameFor(model => model.Member_fee)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CreateDate" class="control-label"></label>
+                            <input asp-for="CreateDate" class="form-control" />
+                            <span asp-validation-for="CreateDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Identity" class="control-label"></label>
-                <input asp-for="Identity" class="form-control" />
-                <span asp-validation-for="Identity" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Member_fee" /> @Html.DisplayNameFor(model => model.Member_fee)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+        </div>
+        <partial name="_Footer" />
+    </section>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
