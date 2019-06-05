@@ -20,14 +20,14 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        //private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly string connectionString;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
-            //RoleManager<IdentityRole> roleManager,
+            RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
@@ -35,7 +35,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
         {
             _userManager = userManager;
             _signInManager = signInManager;
-           // _roleManager = roleManager;
+            _roleManager = roleManager;
             _logger = logger;
             _emailSender = emailSender;
             this.connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -83,6 +83,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email};
@@ -104,32 +105,31 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    /*檢查角色
-                    string[] roleNames = { "Admin", "Member" };
-                    if (_roleManager == null) {
-                        throw new Exception("roleManager null");
-                    }
+                    /* string[] roleNames = { "Admin", "Member" };
+            if (_roleManager == null) {
+                throw new Exception("roleManager null");
+            }
 
-                    IdentityResult IR = null;
-                    foreach (var roleName in roleNames) {
-                        //creating the roles and seeding them to the database
-                        var roleExist = await _roleManager.RoleExistsAsync(roleName);
-                        if (!roleExist) {
-                            IR = await _roleManager.CreateAsync(new IdentityRole(roleName));
-                        }
-                    }
-                    //建立角色授權
-                    var user1 = new IdentityUser { UserName = "0624011@nkust.edu.tw", Email = "0624011@nkust.edu.tw" };
-                    await _userManager.AddToRoleAsync(user1, "Admin");
+            IdentityResult IR = null;
+            foreach (var roleName in roleNames) {
+                //creating the roles and seeding them to the database
+                var roleExist = await _roleManager.RoleExistsAsync(roleName);
+                if (!roleExist) {
+                    IR = await _roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+            建立角色授權
+            IdentityUser user1 = await _userManager.FindByEmailAsync("0624011@nkust.edu.tw");
+            await _userManager.AddToRoleAsync(user1, "Admin");
 
-                    var user2 = new IdentityUser { UserName = "0624005@nkust.edu.tw", Email = "0624005@nkust.edu.tw" };
-                    await _userManager.AddToRoleAsync(user2, "Admin");
+            IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
+            await _userManager.AddToRoleAsync(user2, "Admin");
 
-                    var user3 = new IdentityUser { UserName = "0624055@nkust.edu.tw", Email = "0624055@nkust.edu.tw" };
-                    await _userManager.AddToRoleAsync(user3, "Member");
+            IdentityUser user3 = await _userManager.FindByEmailAsync("0624055@nkust.edu.tw");
+            await _userManager.AddToRoleAsync(user3, "Member"); */
 
 
-                    await _userManager.AddToRoleAsync(user, "Member"); //給角色權限 */
+                    await _userManager.AddToRoleAsync(user, "Member"); //給角色權限 
 
                     //建使用者表
                     using (SqlConnection connection = new SqlConnection(connectionString)) {

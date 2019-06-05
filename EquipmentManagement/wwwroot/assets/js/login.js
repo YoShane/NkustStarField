@@ -10,6 +10,10 @@ function checkSingIn() {
         alert("帳號出現非法文字請檢查");
         event.preventDefault();
         return false;
+    } else {
+        oUname.innerHTML = oUname.value + "＠nkust.edu.tw";
+        alert(oUname.value);
+        return true;
     }
     
     
@@ -18,12 +22,11 @@ function checkSingIn() {
         event.preventDefault();
         return false;
 
-    }else if(Chk(upass.value))
-    {
+    } else if (Chk(upass.value)) {
         alert("密碼出現非法文字請檢查");
         event.preventDefault();
         return false;
-    }
+    } 
    
 }
 function checkSingUp() {
