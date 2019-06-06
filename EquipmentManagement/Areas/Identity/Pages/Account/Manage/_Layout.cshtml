@@ -6,28 +6,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 }
 
-
 <div class="page-wrap">
     <partial name="_Nav" />
 
     <!-- Main -->
     <section id="main">
-
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" href="/">星野山社器材管理</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                    </div>
-                </div>
-            </nav>
-        </header>
-
+        <partial name="_bootstrapHeader" />
         <div class="container">
             <main role="main" class="pb-1">
 
@@ -50,10 +34,10 @@
         </div>
 
         <partial name="_Footer" />
-
     </section>
 </div>
 
 @section Scripts {
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     @RenderSection("Scripts", required: false)
 }

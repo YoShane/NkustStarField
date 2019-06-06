@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@section CSS {
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+}
+
+<div class="page-wrap">
+    <partial name="_Nav" />
+
+    <!-- Main -->
+    <section id="main">
+        <partial name="_bootstrapHeader" />
+        <div class="container"  style="min-height: 30em">
+            <main role="main" class="pb-1">
+                    @RenderBody()
+            </main>
+        </div>
+
+        <partial name="_Footer" />
+    </section>
+</div>
+
+@section Scripts {
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    @RenderSection("Scripts", required: false)
+}

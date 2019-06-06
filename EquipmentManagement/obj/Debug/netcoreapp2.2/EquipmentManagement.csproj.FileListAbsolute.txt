@@ -70,4 +70,4 @@ C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\net
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Members\Edit.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Members\Index.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\EquipmentManagement.csprojAssemblyReference.cache
-C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Manage\_LoginPartial.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_bootstrapHeader.g.cshtml.cs

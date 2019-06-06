@@ -6,41 +6,21 @@
 <nav id="nav">
     <ul>
         <li>
-            <a asp-area="" asp-controller="Home" asp-action="Index">首頁</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index"><span class="fa fa-home"></span></a>
         </li>
         <li>
-            <a asp-area="" asp-controller="Equipments" asp-action="Index">器材瀏覽</a>
-        </li>
-        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) {
-            <li>
-                <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">租借管理</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Locations" asp-action="Index">存放設定</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Members" asp-action="Index">Users管理</a>
-            </li>
-        }
-        <li>
-            <a asp-area="" asp-controller="BorrowOrders" asp-action="Index">訂單查詢</a>
+            <a asp-area="" asp-controller="Equipments" asp-action="Index"><span class="fa fa-list"></span></a>
         </li>
         <li>
-            <a asp-area="" asp-controller="Home" asp-action="About">關於本站</a>
+            <a asp-area="" asp-controller="BorrowOrders" asp-action="Index"><span class="fa fa-book"></span></a>
         </li>
-
         @if (SignInManager.IsSignedIn(User)) {
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index">帳戶</a>
+                <a asp-area="Identity" asp-page="/Account/Manage/Index"><span class="fa fa-folder-open-o"></span></a>
             </li>
-            <!--<form id="logout" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <li>
-                <a href="#" onclick="$('#logout').submit()">登出</a>
-            </li>
-        </form> -->
         } else {
             <li>
-                <a asp-area="Identity" asp-page="/Account/Login">登入</a>
+                <a asp-area="Identity" asp-page="/Account/Login"><span class="fa fa-sign-in"></span></a>
             </li>
         }
 

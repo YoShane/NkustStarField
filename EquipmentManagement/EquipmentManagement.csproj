@@ -37,6 +37,8 @@
     <Content Remove="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+    <Content Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+    <Content Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
     <Content Remove="Views\Shared\_CookieConsentPartial.cshtml" />
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>

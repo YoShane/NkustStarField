@@ -4,13 +4,6 @@
     ViewData["Title"] = "新增紀錄";
 }
 
-<div class="page-wrap">
-    <partial name="_Nav" />
-
-    <!-- Main -->
-    <section id="main">
-        <div class="gallery">
-
             <h1>建立租借紀錄</h1>
 
             <h4>BorrowOrder</h4>
@@ -50,10 +43,6 @@
                 <a asp-action="Index">Back to List</a>
             </div>
 
-        </div>
-        <partial name="_Footer" />
-    </section>
-</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
