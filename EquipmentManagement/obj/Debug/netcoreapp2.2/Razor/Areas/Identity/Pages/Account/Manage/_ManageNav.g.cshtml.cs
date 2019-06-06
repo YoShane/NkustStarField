@@ -23,20 +23,8 @@ using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
-#line 1 "C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\Areas\Identity\Pages\Account\_ViewImports.cshtml"
-using EquipmentManagement.Areas.Identity.Pages.Account;
-
-#line default
-#line hidden
-#line 1 "C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml"
-using EquipmentManagement.Areas.Identity.Pages.Account.Manage;
-
-#line default
-#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d4a7ff4ef06e6debcd766ff4afe18390e5fd9916", @"/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8c587c5052a8648971c1224cc5aab689b9a41a2", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"00aacad5ffff02fdd422bdc711773bf94b372450", @"/Areas/Identity/Pages/Account/_ViewImports.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a05487797d6bef20c50d6decfa334764406f1072", @"/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml")]
     public class Areas_Identity_Pages_Account_Manage__ManageNav : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("id", new global::Microsoft.AspNetCore.Html.HtmlString("profile"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -69,7 +57,7 @@ using EquipmentManagement.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("\r\n<ul class=\"nav nav-pills flex-column\">\r\n    <li class=\"nav-item\">");
             EndContext();
             BeginContext(118, 103, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4a7ff4ef06e6debcd766ff4afe18390e5fd99165835", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4a7ff4ef06e6debcd766ff4afe18390e5fd99165010", async() => {
                 BeginContext(213, 4, true);
                 WriteLiteral("個人檔案");
                 EndContext();
@@ -100,7 +88,7 @@ AddHtmlAttributeValue(" ", 136, ManageNavPages.IndexNavClass(ViewContext), 137, 
             WriteLiteral("</li>\r\n    <li class=\"nav-item\">");
             EndContext();
             BeginContext(253, 129, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4a7ff4ef06e6debcd766ff4afe18390e5fd99167880", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4a7ff4ef06e6debcd766ff4afe18390e5fd99167055", async() => {
                 BeginContext(374, 4, true);
                 WriteLiteral("密碼變更");
                 EndContext();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EquipmentManagement.Data;
 using EquipmentManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EquipmentManagement.Controllers
 {
@@ -20,6 +21,7 @@ namespace EquipmentManagement.Controllers
         }
 
         // GET: BorrowOrders
+        [Authorize(Roles = "Member,Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.BorrowOrder.ToListAsync());

@@ -23,20 +23,8 @@ using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
-#line 1 "C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\Areas\Identity\Pages\Account\_ViewImports.cshtml"
-using EquipmentManagement.Areas.Identity.Pages.Account;
-
-#line default
-#line hidden
-#line 1 "C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml"
-using EquipmentManagement.Areas.Identity.Pages.Account.Manage;
-
-#line default
-#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"caf0ba0e017fe2d5d40e06cba52017213983ba34", @"/Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8c587c5052a8648971c1224cc5aab689b9a41a2", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"00aacad5ffff02fdd422bdc711773bf94b372450", @"/Areas/Identity/Pages/Account/_ViewImports.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a05487797d6bef20c50d6decfa334764406f1072", @"/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml")]
     public class Areas_Identity_Pages_Account_Manage__StatusMessage : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<string>
     {
         #pragma warning disable 1998
