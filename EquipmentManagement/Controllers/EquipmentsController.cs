@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EquipmentManagement.Data;
 using EquipmentManagement.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace EquipmentManagement.Controllers
 {
@@ -54,10 +56,23 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Img,Name,Quantity,Pirce_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment)
+        public async Task<IActionResult> Create([Bind("Id,Img,Name,Quantity,Pirce_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
+                if (Image != null) {
+                    if (Image.Length > 0)
+                    //Convert Image to byte and save to database
+                    {
+                        byte[] p1 = null;
+                        using (var fs1 = Image.OpenReadStream())
+                        using (var ms1 = new MemoryStream()) {
+                            fs1.CopyTo(ms1);
+                            p1 = ms1.ToArray();
+                        }
+                        equipment.Img = p1;
+                    }
+                }
                 _context.Add(equipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -74,6 +89,7 @@ namespace EquipmentManagement.Controllers
             }
 
             var equipment = await _context.Equipment.FindAsync(id);
+          
             if (equipment == null)
             {
                 return NotFound();
@@ -86,7 +102,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Img,Name,Quantity,Pirce_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Img,Name,Quantity,Pirce_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
         {
             if (id != equipment.Id)
             {
@@ -95,8 +111,23 @@ namespace EquipmentManagement.Controllers
 
             if (ModelState.IsValid)
             {
+
                 try
                 {
+                    if (Image != null) {
+                        if (Image.Length > 0)
+                        //Convert Image to byte and save to database
+                        {
+                            byte[] p1 = null;
+                            using (var fs1 = Image.OpenReadStream())
+                            using (var ms1 = new MemoryStream()) {
+                                fs1.CopyTo(ms1);
+                                p1 = ms1.ToArray();
+                            }
+                            equipment.Img = p1;
+                        }
+                    }
+
                     _context.Update(equipment);
                     await _context.SaveChangesAsync();
                 }

@@ -4,14 +4,16 @@ using EquipmentManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EquipmentManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190607035904_hotmail")]
+    partial class hotmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +48,7 @@ namespace EquipmentManagement.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Img");
+                    b.Property<string>("Img");
 
                     b.Property<string>("Location");
 
@@ -96,8 +98,7 @@ namespace EquipmentManagement.Data.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<string>("Hot_mail")
-                        .HasMaxLength(100);
+                    b.Property<string>("Hot_mail");
 
                     b.Property<string>("Identity")
                         .IsRequired();
@@ -112,7 +113,7 @@ namespace EquipmentManagement.Data.Migrations
                         .HasMaxLength(10);
 
                     b.Property<string>("Stu_mail")
-                        .HasMaxLength(100);
+                        .IsRequired();
 
                     b.HasKey("Id");
 

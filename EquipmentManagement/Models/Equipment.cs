@@ -9,7 +9,7 @@ namespace EquipmentManagement.Models
         public int Id { get; set; }
 
         [Display(Name = "器材照片")]
-        public string Img { get; set; }
+        public byte[] Img { get; set; }
 
         [Required]
         [Display(Name = "器材名稱"), StringLength(50, MinimumLength = 1)]

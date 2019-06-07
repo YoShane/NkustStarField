@@ -8,8 +8,9 @@ namespace EquipmentManagement.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "學生信箱")]
+        [EmailAddress, StringLength(100)]
+        [Editable(false)]
         public string Stu_mail { get; set; }
 
         [Display(Name = "手機號碼"), StringLength(10, MinimumLength = 10)]
@@ -18,6 +19,10 @@ namespace EquipmentManagement.Models
         [Required]
         [Display(Name = "姓名"), StringLength(50, MinimumLength = 1)]
         public string Name { get; set; }
+
+        [Display(Name = "聯絡信箱")]
+        [EmailAddress, StringLength(100)]
+        public string Hot_mail { get; set; }
 
         [Required]
         [Display(Name = "身份")]

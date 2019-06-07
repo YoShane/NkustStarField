@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 
 namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
 {
@@ -16,15 +18,18 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly string connectionString;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            this.connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         [Display(Name = "帳號")]
@@ -92,6 +97,19 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
             if (Input.Email != email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    String sqlQuery = $"UPDATE dbo.Member SET Hot_mail = '{Input.Email}' WHERE Stu_mail = '{user.UserName}'";
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection)) {
+                        await connection.OpenAsync();
+                        try {
+                            await command.ExecuteNonQueryAsync();
+                        }
+                        catch (SqlException ex) {
+                            Console.WriteLine("Operation got error:" + ex.Message);
+                        }
+                        connection.Close();
+                    }
+                }
                 if (!setEmailResult.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -103,6 +121,19 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    String sqlQuery = $"UPDATE dbo.Member SET Phone = '{Input.PhoneNumber}' WHERE Stu_mail = '{user.UserName}'";
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection)) {
+                        await connection.OpenAsync();
+                        try {
+                            await command.ExecuteNonQueryAsync();
+                        }
+                        catch (SqlException ex) {
+                            Console.WriteLine("Operation got error:" + ex.Message);
+                        }
+                        connection.Close();
+                    }
+                }
                 if (!setPhoneResult.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -111,7 +142,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "你的帳號資訊已經更新";
             return RedirectToPage();
         }
 
