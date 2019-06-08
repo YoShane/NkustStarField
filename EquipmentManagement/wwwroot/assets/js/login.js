@@ -1,20 +1,17 @@
 function checkSingIn() {
-    var oUname = document.getElementById("uname")
+    var uidDomain = customizeDomain($("#uname").val());
+    $("#uname").val(uidDomain);
     var oUpass = document.getElementById("upass")
 
-    if (oUname.value.length > 20 || oUname.value.length <= 6) {
-        alert("請在確認一次學號");
+    if (uidDomain.length >= 34 || uidDomain.length <= 18) {
+        alert("請輸入6-20位字元的前綴帳號");
         event.preventDefault();
         return false;
     }
-    else if (Chk(oUname.value)) {
-        alert("帳號出現非法文字請檢查");
-        event.preventDefault();
-        return false;
-    } 
     
-    if (oUpass.value.length > 20 || oUpass.value.length <= 6) {
-        alert("請在確認一次密碼");
+    
+    if (oUpass.value.length > 100 || oUpass.value.length <= 6) {
+        alert("密碼長度需6位以上");
         event.preventDefault();
         return false;
 
@@ -23,35 +20,25 @@ function checkSingIn() {
         event.preventDefault();
         return false;
     } 
-    var uidDomain = customizeDomain($("#uname").val());
-    $("#uname").val(uidDomain);
+
     $("#account").submit();
     return true;
 }
 
 function checkSingUp() {
-    var oUname = document.getElementById("nname")
+    var uidDomain = customizeDomain($("#nname").val());
+    $("#nname").val(uidDomain);
     var oUpass = document.getElementById("npass")
     var aUpass = document.getElementById("surenpass")
 
-    if (oUname.value.length > 20 || oUname.value.length < 6) {
-        alert("請輸入6-20位字元的學號");
+    if (uidDomain.length >= 34 || uidDomain.length <= 18) {
+        alert("請輸入6-20位字元的前綴帳號");
         event.preventDefault();
         return false;
     }
-    else if(Chk(oUname.value))
-        {
-            alert("帳號出現非法文字請檢查");
 
-        event.preventDefault();
-        return false;
-        }
-    
-    var uidDomain = customizeDomain($("#nname").val());
-    $("#nname").val(uidDomain);
-
-    if (oUpass.value.length > 20 || oUpass.value.length < 6) {
-        alert("請輸入6-20位字元的密碼");
+    if (oUpass.value.length > 100 || oUpass.value.length < 6) {
+        alert("密碼長度需6位以上");
     } else if (Chk(oUpass.value))
     {
         alert("密碼出現非法文字請檢查");
@@ -85,18 +72,6 @@ function checkPhone() {
     } else { return document.getElementById('phone').innerHTML = 'ok'; }
 }
 
-
-
-function Chk(email) {
-    var regex = /[^a-z^A-Z^0-9]/g;
-    if (!regex.test(email)) {
-        event.preventDefault();
-        return false;
-    } else {
-        return true;
-    }
-}
-
 function ChkName() {
     var oUpass = document.getElementById("chiname")
     var regex = /[^%&',;=?$x22]+/;
@@ -109,9 +84,17 @@ function ChkName() {
     }
 }
 
-
+function Chk(email) {
+    var regex = /[^a-z^A-Z^0-9]/g;
+    if (!regex.test(email)) {
+        event.preventDefault();
+        return false;
+    } else {
+        return true;
+    }
+}
 // =====================================
-/* Config Setting:
+/* Config Setting: (取自第一校區 eSpace login page)
 	(1) 以下兩個參數功能互斥，所以不應該兩個開關都是 true
 	AUTO_ADD_DOMAIN 		=> 是否自動加上 "@domain" (若為true：如果用戶有輸入"@domain"將自動去掉，再自動加上正確的"@domain")
 	AUTO_DELETE_DOMAIN 		=> 是否自動刪除 "@domain" (若為true：如果用戶有輸入"@domain"將自動去掉；若為否，系統則無任何動作)

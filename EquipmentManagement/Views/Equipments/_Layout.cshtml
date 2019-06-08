@@ -3,24 +3,21 @@
 }
 @section CSS {
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    @RenderSection("CSS", required: false)
 }
-
 <div class="page-wrap">
     <partial name="_Nav" />
-
     <!-- Main -->
     <section id="main">
         <partial name="_bootstrapHeader" />
-        <div class="container"  style="min-height: 45em">
+        <div class="container" style="min-height: 45em">
             <main role="main" class="pb-1">
-                    @RenderBody()
+                @RenderBody()
             </main>
         </div>
-
         <partial name="_Footer" />
     </section>
 </div>
-
 @section Scripts {
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     @RenderSection("Scripts", required: false)

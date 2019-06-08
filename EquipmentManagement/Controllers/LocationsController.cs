@@ -26,7 +26,7 @@ namespace EquipmentManagement.Controllers
         }
 
         // GET: Locations/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -34,7 +34,7 @@ namespace EquipmentManagement.Controllers
             }
 
             var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Location_code == id);
             if (location == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,Name")] Location location)
+        public async Task<IActionResult> Create([Bind("Location_code,Name")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace EquipmentManagement.Controllers
         }
 
         // GET: Locations/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -86,9 +86,9 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Name")] Location location)
+        public async Task<IActionResult> Edit(string id, [Bind("Location_code,Name")] Location location)
         {
-            if (id != location.Id)
+            if (id != location.Location_code)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace EquipmentManagement.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LocationExists(location.Id))
+                    if (!LocationExists(location.Location_code))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace EquipmentManagement.Controllers
         }
 
         // GET: Locations/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -125,7 +125,7 @@ namespace EquipmentManagement.Controllers
             }
 
             var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Location_code == id);
             if (location == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace EquipmentManagement.Controllers
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var location = await _context.Location.FindAsync(id);
             _context.Location.Remove(location);
@@ -145,9 +145,9 @@ namespace EquipmentManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LocationExists(int id)
+        private bool LocationExists(string id)
         {
-            return _context.Location.Any(e => e.Id == id);
+            return _context.Location.Any(e => e.Location_code == id);
         }
     }
 }

@@ -17,5 +17,8 @@ namespace EquipmentManagement.Data
         public DbSet<EquipmentManagement.Models.Member> Member { get; set; }
         public DbSet<EquipmentManagement.Models.Location> Location { get; set; }
         public DbSet<EquipmentManagement.Models.BorrowOrder> BorrowOrder { get; set; }
+        public DbSet<EquipmentManagement.Models.BorrowRecord> BorrowRecord { get; set; }
+
+
     }
 }

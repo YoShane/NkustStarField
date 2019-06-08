@@ -9,22 +9,28 @@ using EquipmentManagement.Data;
 using EquipmentManagement.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Data;
 
 namespace EquipmentManagement.Controllers
 {
     public class EquipmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly string connectionString;
 
-        public EquipmentsController(ApplicationDbContext context)
+        public EquipmentsController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            this.connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         // GET: Equipments
         public async Task<IActionResult> Index()
         {
             return View(await _context.Equipment.ToListAsync());
+
         }
 
         // GET: Equipments/Details/5
@@ -56,13 +62,13 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Img,Name,Quantity,Pirce_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
+        public async Task<IActionResult> Create([Bind("Id,Img,Name,Quantity,Price_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
                 if (Image != null) {
-                    if (Image.Length > 0)
-                    //Convert Image to byte and save to database
+                    if (Image.Length > 0 && Image.Length/ 1048576.0 < 3)
+                    //Convert Image to byte and save to database(3MB以內)
                     {
                         byte[] p1 = null;
                         using (var fs1 = Image.OpenReadStream())
@@ -72,7 +78,7 @@ namespace EquipmentManagement.Controllers
                         }
                         equipment.Img = p1;
                     }
-                }
+                } 
                 _context.Add(equipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,6 +100,7 @@ namespace EquipmentManagement.Controllers
             {
                 return NotFound();
             }
+  
             return View(equipment);
         }
 
@@ -102,7 +109,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Img,Name,Quantity,Pirce_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Quantity,Price_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
         {
             if (id != equipment.Id)
             {
@@ -111,13 +118,16 @@ namespace EquipmentManagement.Controllers
 
             if (ModelState.IsValid)
             {
-
+                int tmpBit = 0;
+                if (equipment.Special) tmpBit = 1;
                 try
                 {
+                    String sqlQuery = "";
+
                     if (Image != null) {
-                        if (Image.Length > 0)
-                        //Convert Image to byte and save to database
-                        {
+                        if (Image.Length > 0 && Image.Length / 1048576.0 < 3)
+                       //Convert Image to byte and save to database
+                       {
                             byte[] p1 = null;
                             using (var fs1 = Image.OpenReadStream())
                             using (var ms1 = new MemoryStream()) {
@@ -126,10 +136,29 @@ namespace EquipmentManagement.Controllers
                             }
                             equipment.Img = p1;
                         }
+                        sqlQuery = $"UPDATE dbo.Equipment SET Img = @img, Period_time = @d," +
+$" Name = '{equipment.Name}', Source = '{equipment.Source}', Location = '{equipment.Location_code}', Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
+                    } else {
+                        sqlQuery = $"UPDATE dbo.Equipment SET Name = '{equipment.Name}', Period_time = @d," +
+                    $" Source = '{equipment.Source}', Location = '{equipment.Location_code}', Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
                     }
 
-                    _context.Update(equipment);
-                    await _context.SaveChangesAsync();
+                    using (SqlConnection connection = new SqlConnection(connectionString)) {
+
+                        using (SqlCommand command = new SqlCommand(sqlQuery, connection)) {
+                            await connection.OpenAsync();
+                            command.Parameters.Add("@d", SqlDbType.DateTime2).Value = equipment.Period_time;
+                            command.Parameters.Add("@img", SqlDbType.Binary).Value = equipment.Img;
+                            try {
+                                await command.ExecuteNonQueryAsync();
+                            }
+                            catch (SqlException ex) {
+                                Console.WriteLine("Operation got error:" + ex.Message);
+                            }
+                            connection.Close();
+                        }
+                    }
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -180,5 +209,6 @@ namespace EquipmentManagement.Controllers
         {
             return _context.Equipment.Any(e => e.Id == id);
         }
+
     }
 }

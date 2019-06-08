@@ -1,11 +1,12 @@
-﻿@page
+﻿
+@page
 @model RegisterModel
 @{
     ViewData["Title"] = "註冊";
 }
 
 @section CSS {
-    <link href="~/assets/css/style2.css" rel='stylesheet' type='text/css' media="all" />
+    <link href="~/css/style2.css" rel='stylesheet' type='text/css' media="all" />
 }
 
 
@@ -20,7 +21,7 @@
 
         <div class="form-style-agile">
             <label asp-for="Input.Email"></label>
-            <input asp-for="Input.Email" type="text" class="form-control" id="nname" onfocus="this.value = '';" />
+            <input asp-for="Input.Email" type="text" class="form-control" id="nname" placeholder="學號/學校信箱" onfocus="this.value = '';" />
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
         <div class="form-style-agile">

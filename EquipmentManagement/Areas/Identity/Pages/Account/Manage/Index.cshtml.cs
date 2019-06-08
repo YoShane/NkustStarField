@@ -47,11 +47,11 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "常用電子郵件")]
+            [Display(Name = "收信電子郵件")]
             public string Email { get; set; }
 
             [Phone]
-            [Display(Name = "手機號碼")]
+            [Display(Name = "連絡電話"), StringLength(20, MinimumLength = 10,ErrorMessage ="電話長度不合法")]
             public string PhoneNumber { get; set; }
         }
 
@@ -109,7 +109,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
                         }
                         connection.Close();
                     }
-                }
+                } //連動Member更改Email
                 if (!setEmailResult.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -133,8 +133,8 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account.Manage
                         }
                         connection.Close();
                     }
-                }
-                if (!setPhoneResult.Succeeded)
+                } //連動Member更改手機號碼
+                if (!setPhoneResult.Succeeded) 
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");

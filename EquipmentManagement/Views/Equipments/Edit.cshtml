@@ -18,15 +18,18 @@
                             <input asp-for="Name" class="form-control" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        @if (Model.Img != null) {
+                            <img src="data:image/png;base64,@(Convert.ToBase64String(Model.Img)) " width="150" class="img-thumbnail "  style="margin-bottom:20px"/>
+                        }
+                        <div class="form-group" >
                             <label asp-for="Quantity" class="control-label"></label>
                             <input asp-for="Quantity" class="form-control" />
                             <span asp-validation-for="Quantity" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Pirce_non_member" class="control-label"></label>
-                            <input asp-for="Pirce_non_member" class="form-control" />
-                            <span asp-validation-for="Pirce_non_member" class="text-danger"></span>
+                            <label asp-for="Price_non_member" class="control-label"></label>
+                            <input asp-for="Price_non_member" class="form-control" />
+                            <span asp-validation-for="Price_non_member" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Price_member" class="control-label"></label>
@@ -49,20 +52,21 @@
                             <span asp-validation-for="Period_time" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Location" class="control-label"></label>
-                            <input asp-for="Location" class="form-control" />
-                            <span asp-validation-for="Location" class="text-danger"></span>
+                            <label asp-for="Location_code" class="control-label"></label>
+                            <input asp-for="Location_code" class="form-control" />
+                            <span asp-validation-for="Location_code" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Img" class="control-label"></label>
-                            <input asp-for="Img" class="form-control" type="file" name="Image" />
-                            <span asp-validation-for="Img" class="text-danger"></span>
+                            <label class="control-label">變更圖片</label>
+                            <input class="form-control" type="file" name="Image" style="padding-bottom:40px" />
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Save" class="btn btn-primary" />
                         </div>
+
                     </form>
                 </div>
+
             </div>
 
             <div>

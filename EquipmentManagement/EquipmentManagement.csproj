@@ -21,6 +21,18 @@
     <Compile Remove="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\Manage\_LoginPartial.cshtml.cs" />
+    <Compile Remove="Migrations\20190608140423_Initial.cs" />
+    <Compile Remove="Migrations\20190608140423_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190608144147_Initial.cs" />
+    <Compile Remove="Migrations\20190608144147_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190608144904_Initial.cs" />
+    <Compile Remove="Migrations\20190608144904_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190608144951_Initial.cs" />
+    <Compile Remove="Migrations\20190608144951_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190608160642_Initial.cs" />
+    <Compile Remove="Migrations\20190608160642_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190608161031_Initial.cs" />
+    <Compile Remove="Migrations\20190608161031_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +53,7 @@
     <Content Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
     <Content Remove="Views\Shared\_CookieConsentPartial.cshtml" />
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />
+    <Content Remove="wwwroot\assets\js\login.js~RF1098532a.TMP" />
   </ItemGroup>
 
 

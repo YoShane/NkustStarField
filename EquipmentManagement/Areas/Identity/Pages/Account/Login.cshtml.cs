@@ -36,9 +36,9 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "學號欄位不可空白")]
+            [Required(ErrorMessage = "帳號欄位不可空白")]
             [EmailAddress(ErrorMessage = " ")]
-            [Display(Name = "學號")]
+            [Display(Name = "帳號")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "密碼欄位不可空白")]

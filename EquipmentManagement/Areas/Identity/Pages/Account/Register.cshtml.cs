@@ -48,16 +48,16 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "學號欄位不可空白")]
+            [Required(ErrorMessage = "帳號欄位不可空白")]
             [EmailAddress(ErrorMessage = " ")]
-            [Display(Name = "學號")]
+            [Display(Name = "帳號")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "姓名欄位不可空白")]
             [Display(Name = "姓名")]
             public string Name { get; set; }
 
-            [Required(ErrorMessage = "手機欄位不可空白")]
+            [Required(ErrorMessage = "電話欄位不可空白")]
             [Phone(ErrorMessage = "輸入格式有誤")]
             [Display(Name = "手機號碼")]
             public string Phone { get; set; }
@@ -85,7 +85,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email};
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.Phone};
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -104,7 +104,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    /*    string[] roleNames = { "Admin", "Member" };
+                       string[] roleNames = { "Admin", "Member" };
                if (_roleManager == null) {
                    throw new Exception("roleManager null");
                }
@@ -117,15 +117,15 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
                        IR = await _roleManager.CreateAsync(new IdentityRole(roleName));
                    }
                }
-               建立角色授權
-               IdentityUser user1 = await _userManager.FindByEmailAsync("0624011@nkust.edu.tw");
-               await _userManager.AddToRoleAsync(user1, "Admin");
 
-               IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
-               await _userManager.AddToRoleAsync(user2, "Admin");
+                    /* IdentityUser user1 = await _userManager.FindByEmailAsync("0624011@nkust.edu.tw");
+                    await _userManager.AddToRoleAsync(user1, "Admin");
 
-               IdentityUser user3 = await _userManager.FindByEmailAsync("0624055@nkust.edu.tw");
-               await _userManager.AddToRoleAsync(user3, "Member");  */
+                   IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
+                    await _userManager.AddToRoleAsync(user2, "Admin");
+
+                    IdentityUser user3 = await _userManager.FindByEmailAsync("0624055@nkust.edu.tw");
+                    await _userManager.AddToRoleAsync(user3, "Member");  */
 
 
                     await _userManager.AddToRoleAsync(user, "Member"); //給角色權限 
