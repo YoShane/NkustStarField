@@ -19,24 +19,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" class="form-control" onfocus="this.value = '';" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price_member" class="control-label"></label>
-                <input asp-for="Price_member" class="form-control" />
+                <input asp-for="Price_member" class="form-control" onfocus="this.value = '';"/>
                 <span asp-validation-for="Price_member" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price_non_member" class="control-label"></label>
-                <input asp-for="Price_non_member" class="form-control" onclick="ready()" />
+                <input asp-for="Price_non_member" class="form-control" onclick="ready()" onfocus="this.value = '';" />
                 <span asp-validation-for="Price_non_member" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Source" class="control-label"></label>
                 <input asp-for="Source" class="form-control" />
                 <span asp-validation-for="Source" class="text-danger"></span>
-            </div>="Code
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Special" /> @Html.DisplayNameFor(model => model.Special)
@@ -49,7 +49,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Location_code" class="control-label"></label>
-                <input asp-for="Location_code" class="form-control" />
+                <select asp-for="Location_code">
+                    @for(int i = 0; i < Model.List.Count; i++) {
+                        <option value="@Html.Raw(Model.ListValue[i])">@Html.Raw(Model.List[i])</option>
+                    }
+                </select>
+
                 <span asp-validation-for="Location_code" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -65,5 +70,5 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">回到上一頁</a>
 </div>

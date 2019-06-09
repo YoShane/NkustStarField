@@ -23,10 +23,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Img)
-                    </th>
-                    <th>
+                    <th colspan="2">
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th>
@@ -39,30 +36,25 @@
                         @Html.DisplayNameFor(model => model.Price_member)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Source)
-                    </th>
-                    <th>
-                        技術性
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Period_time)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Location_code)
                     </th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model) {
                     <tr>
                         <td>
-                            @if (item.Img != null) {
-                                <img src="data:image/png;base64,@(Convert.ToBase64String(item.Img)) " width="50"  class="img-thumbnail "/>
+                                @if (item.Img != null) {
+                            <a asp-action="Details" asp-route-id="@item.Id">
+                                <img src="data:image/png;base64,@(Convert.ToBase64String(item.Img)) " width="50" class="img-thumbnail " />
+                            </a>
                             }
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            <a asp-action="Details" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Name)  </a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Quantity)
@@ -74,21 +66,10 @@
                             @Html.DisplayFor(modelItem => item.Price_member)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Source)
-                        </td>
-                        <td align="center">
-                            @Html.DisplayFor(modelItem => item.Special)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Period_time)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Location_code)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }

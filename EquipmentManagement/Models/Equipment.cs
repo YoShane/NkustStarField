@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,7 +20,7 @@ namespace EquipmentManagement.Models
 
         [Required]
         [Range(1, Int64.MaxValue, ErrorMessage = "數量格式不合法")]
-        [Display(Name = "器材數量")]
+        [Display(Name = "數量")]
         public int Quantity { get; set; }
 
         [Required]
@@ -34,10 +35,10 @@ namespace EquipmentManagement.Models
         [Display(Name = "器材來源"), StringLength(30, MinimumLength = 2)]
         public string Source { get; set; }
 
-        [Display(Name = "技術性工具")]
+        [Display(Name = "此為技術性工具")]
         public bool Special { get; set; }
 
-        [Display(Name = "使用期限"), DataType(DataType.Date)]
+        [Display(Name = "期限"), DataType(DataType.Date)]
         public DateTime Period_time { get; set; }
 
         [Required]
@@ -46,5 +47,15 @@ namespace EquipmentManagement.Models
         
         [ForeignKey("Location_code")]
         public virtual Location Location { get; set; } //導覽至位置名稱(限制性)
+
+        //額外
+        [NotMapped]
+        public List<string> List { get; set; }
+        [NotMapped]
+        public List<string> ListValue { get; set; }
+
+        [NotMapped]
+        [Display(Name = "剩餘數量")]
+        public int Surplus { get; set; }
     }
 }

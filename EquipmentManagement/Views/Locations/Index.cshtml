@@ -4,14 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>存放位置管理</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">建立新的位置</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Location_code)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -22,12 +25,14 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Location_code)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Location_code">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Location_code">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Location_code">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Location_code">編輯地點資訊</a> |
+                <a asp-action="Delete" asp-route-id="@item.Location_code">刪除</a>
             </td>
         </tr>
 }

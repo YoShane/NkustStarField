@@ -19,6 +19,7 @@ namespace EquipmentManagement.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly string connectionString;
+        public Location Location;
 
         public EquipmentsController(ApplicationDbContext context, IConfiguration configuration)
         {
@@ -52,9 +53,33 @@ namespace EquipmentManagement.Controllers
         }
 
         // GET: Equipments/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+
+            List<string> item = new List<string>();
+            List<string> itemValue = new List<string>();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                //SqlDataReader
+                await connection.OpenAsync();
+                String sqlQuery = "SELECT * FROM dbo.Location ORDER BY Name ASC";
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync(CommandBehavior.SequentialAccess)) {
+                    while (await dataReader.ReadAsync()) {
+                        itemValue.Add(Convert.ToString(dataReader["Location_code"]));
+                        item.Add(Convert.ToString(dataReader["Name"]));
+                    }
+                }
+            }
+
+            Equipment equipment = new Equipment();
+            equipment.List = item;
+            equipment.ListValue = itemValue;
+            equipment.Quantity = 1;
+            var plusTime = DateTime.Now.Date.AddYears(10);
+            equipment.Period_time = plusTime;
+ 
+            return View(equipment);
         }
 
         // POST: Equipments/Create
@@ -62,7 +87,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Img,Name,Quantity,Price_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
+        public async Task<IActionResult> Create([Bind("Id,Img,Name,Quantity,Price_non_member,Price_member,Source,Special,Period_time,Location_code")] Equipment equipment, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +134,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Quantity,Price_non_member,Price_member,Source,Special,Period_time,Location")] Equipment equipment, IFormFile Image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Quantity,Price_non_member,Price_member,Source,Special,Period_time,Location_code")] Equipment equipment, IFormFile Image)
         {
             if (id != equipment.Id)
             {
@@ -122,8 +147,6 @@ namespace EquipmentManagement.Controllers
                 if (equipment.Special) tmpBit = 1;
                 try
                 {
-                    String sqlQuery = "";
-
                     if (Image != null) {
                         if (Image.Length > 0 && Image.Length / 1048576.0 < 3)
                        //Convert Image to byte and save to database
@@ -136,26 +159,50 @@ namespace EquipmentManagement.Controllers
                             }
                             equipment.Img = p1;
                         }
-                        sqlQuery = $"UPDATE dbo.Equipment SET Img = @img, Period_time = @d," +
-$" Name = '{equipment.Name}', Source = '{equipment.Source}', Location = '{equipment.Location_code}', Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
+                        String sqlQuery = $"UPDATE dbo.Equipment SET Img = @img, Period_time = @d," +
+$" Name = @name, Source = @source, Location_code = @code, Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
+
+                        using (SqlConnection connection = new SqlConnection(connectionString)) {
+
+                            using (SqlCommand command = new SqlCommand(sqlQuery, connection)) {
+                                await connection.OpenAsync();
+                                command.Parameters.Add("@d", SqlDbType.DateTime2).Value = equipment.Period_time;
+                                command.Parameters.Add("@img", SqlDbType.Binary).Value = equipment.Img;
+
+                                command.Parameters.Add("@name", SqlDbType.NVarChar).Value = equipment.Name;
+                                command.Parameters.Add("@source", SqlDbType.NVarChar).Value = equipment.Source;
+                                command.Parameters.Add("@code", SqlDbType.NVarChar).Value = equipment.Location_code;
+
+                                try {
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                                catch (SqlException ex) {
+                                    Console.WriteLine("Operation got error:" + ex.Message);
+                                }
+                                connection.Close();
+                            }
+                        }
                     } else {
-                        sqlQuery = $"UPDATE dbo.Equipment SET Name = '{equipment.Name}', Period_time = @d," +
-                    $" Source = '{equipment.Source}', Location = '{equipment.Location_code}', Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
-                    }
+                        String sqlQuery = $"UPDATE dbo.Equipment SET Name = @name, Period_time = @d," +
+                    $" Source = @source, Location_code = @code, Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
 
-                    using (SqlConnection connection = new SqlConnection(connectionString)) {
+                        using (SqlConnection connection = new SqlConnection(connectionString)) {
 
-                        using (SqlCommand command = new SqlCommand(sqlQuery, connection)) {
-                            await connection.OpenAsync();
-                            command.Parameters.Add("@d", SqlDbType.DateTime2).Value = equipment.Period_time;
-                            command.Parameters.Add("@img", SqlDbType.Binary).Value = equipment.Img;
-                            try {
-                                await command.ExecuteNonQueryAsync();
+                            using (SqlCommand command = new SqlCommand(sqlQuery, connection)) {
+                                await connection.OpenAsync();
+                                command.Parameters.Add("@d", SqlDbType.DateTime2).Value = equipment.Period_time;
+                                command.Parameters.Add("@name", SqlDbType.NVarChar).Value = equipment.Name;
+                                command.Parameters.Add("@source", SqlDbType.NVarChar).Value = equipment.Source;
+                                command.Parameters.Add("@code", SqlDbType.NVarChar).Value = equipment.Location_code;
+
+                                try {
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                                catch (SqlException ex) {
+                                    Console.WriteLine("Operation got error:" + ex.Message);
+                                }
+                                connection.Close();
                             }
-                            catch (SqlException ex) {
-                                Console.WriteLine("Operation got error:" + ex.Message);
-                            }
-                            connection.Close();
                         }
                     }
 
@@ -209,6 +256,7 @@ $" Name = '{equipment.Name}', Source = '{equipment.Source}', Location = '{equipm
         {
             return _context.Equipment.Any(e => e.Id == id);
         }
+
 
     }
 }

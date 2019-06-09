@@ -7,40 +7,45 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EquipmentManagement.Data;
 using EquipmentManagement.Models;
+using System.Data.SqlClient;
+using System.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace EquipmentManagement.Controllers
 {
     public class LocationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly string connectionString;
 
-        public LocationsController(ApplicationDbContext context)
+        public LocationsController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            this.connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Location.ToListAsync());
-        }
+            List<Location> locations = new List<Location>();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                //SqlDataReader
+                await connection.OpenAsync();
+                String sqlQuery = "SELECT * FROM dbo.Location ORDER BY Name ASC";
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
 
-        // GET: Locations/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync(CommandBehavior.SequentialAccess)) {
+                    while (await dataReader.ReadAsync()) {
+                        Location location = new Location();
+                        location.Location_code = Convert.ToString(dataReader["Location_code"]);
+                        location.Name = Convert.ToString(dataReader["Name"]);
+                        locations.Add(location);
+                    }
+                }
+
             }
 
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Location_code == id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return View(location);
+            return View(locations);
         }
 
         // GET: Locations/Create
@@ -149,5 +154,7 @@ namespace EquipmentManagement.Controllers
         {
             return _context.Location.Any(e => e.Location_code == id);
         }
+
+
     }
 }

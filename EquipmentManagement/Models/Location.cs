@@ -12,7 +12,7 @@ namespace EquipmentManagement.Models
 
         [Key]
         [Display(Name = "位置代碼")]
-        [EmailAddress, StringLength(10, MinimumLength = 1)]
+        [StringLength(10, MinimumLength = 1),RegularExpression(@"^[a-zA-Z0-9""'\s-]*$",ErrorMessage ="僅允許輸入英數組合")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Location_code { get; set; }
 
