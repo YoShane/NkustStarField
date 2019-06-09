@@ -1,47 +1,52 @@
 ﻿@model EquipmentManagement.Models.BorrowOrder
 
 @{
-    ViewData["Title"] = "新增紀錄";
+    ViewData["Title"] = "Create";
 }
 
-            <h1>建立租借紀錄</h1>
+<h1>Create</h1>
 
-            <h4>BorrowOrder</h4>
-            <hr />
-            <div class="row">
-                <div class="col-md-4">
-                    <form asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="Stu_mail" class="control-label"></label>
-                            <input asp-for="Stu_mail" class="form-control" />
-                            <span asp-validation-for="Stu_mail" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Borrow_time" class="control-label"></label>
-                            <input asp-for="Borrow_time" class="form-control" />
-                            <span asp-validation-for="Borrow_time" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Restore_time" class="control-label"></label>
-                            <input asp-for="Restore_time" class="form-control" />
-                            <span asp-validation-for="Restore_time" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Remark" class="control-label"></label>
-                            <input asp-for="Remark" class="form-control" />
-                            <span asp-validation-for="Remark" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
+<h4>BorrowOrder</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Stu_mail" class="control-label"></label>
+                <input asp-for="Stu_mail" class="form-control" />
+                <span asp-validation-for="Stu_mail" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Borrow_time" class="control-label"></label>
+                <input asp-for="Borrow_time" class="form-control" />
+                <span asp-validation-for="Borrow_time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Restore_time" class="control-label"></label>
+                <input asp-for="Restore_time" class="form-control" />
+                <span asp-validation-for="Restore_time" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Restore_state" /> @Html.DisplayNameFor(model => model.Restore_state)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remark" class="control-label"></label>
+                <input asp-for="Remark" class="form-control" />
+                <span asp-validation-for="Remark" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 
-            <div>
-                <a asp-action="Index">回到上一頁</a>
-            </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -45,11 +45,6 @@ C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\net
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Footer.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Nav.g.cshtml.cs
-C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Create.g.cshtml.cs
-C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Delete.g.cshtml.cs
-C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Details.g.cshtml.cs
-C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Edit.g.cshtml.cs
-C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Index.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Equipments\Create.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Equipments\Delete.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Equipments\Details.g.cshtml.cs
@@ -62,7 +57,6 @@ C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\net
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Members\Index.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\EquipmentManagement.csprojAssemblyReference.cache
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_bootstrapHeader.g.cshtml.cs
-C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\_Layout.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Equipments\_Layout.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Members\_Layout.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Manage\Profile.g.cshtml.cs

@@ -118,10 +118,11 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
                    }
                }
 
-                    /* IdentityUser user1 = await _userManager.FindByEmailAsync("0624011@nkust.edu.tw");
+                     IdentityUser user1 = await _userManager.FindByEmailAsync("0624011@nkust.edu.tw");
                     await _userManager.AddToRoleAsync(user1, "Admin");
 
-                   IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
+
+                 /*  IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
                     await _userManager.AddToRoleAsync(user2, "Admin");
 
                     IdentityUser user3 = await _userManager.FindByEmailAsync("0624055@nkust.edu.tw");

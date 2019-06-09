@@ -24,7 +24,7 @@ using EquipmentManagement.Models;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"40122e471ead0dda97781e80c2be0603177b09fa", @"/Views/Locations/Edit.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4e2251c7943319063494df12f7cbe907de7125c9", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"eafb0ab7b065fb2e3bbc3e4c414fbe958707142e", @"/Views/_ViewImports.cshtml")]
     public class Views_Locations_Edit : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<EquipmentManagement.Models.Location>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("text-danger"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

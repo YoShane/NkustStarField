@@ -1,53 +1,59 @@
 ﻿@model IEnumerable<EquipmentManagement.Models.BorrowOrder>
 
 @{
-    ViewData["Title"] = "訂單查詢";
+    ViewData["Title"] = "Index";
 }
 
-            <h1>租借紀錄</h1>
+<h1>Index</h1>
 
-            <p>
-                <a asp-action="Create">建立新的一筆</a>
-            </p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Stu_mail)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Borrow_time)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Restore_time)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Remark)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model) {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Stu_mail)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Borrow_time)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Restore_time)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Remark)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+<p>
+    <a asp-action="Create">訂單新增</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stu_mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrow_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restore_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restore_state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remark)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stu_mail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Borrow_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restore_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restore_state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

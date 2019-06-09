@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EquipmentManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BorrowOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +22,6 @@ namespace EquipmentManagement.Controllers
         }
 
         // GET: BorrowOrders
-        [Authorize(Roles = "Member,Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.BorrowOrder.ToListAsync());
@@ -56,7 +56,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Member,Borrow_time,Restore_time,Remark")] BorrowOrder borrowOrder)
+        public async Task<IActionResult> Create([Bind("Id,Stu_mail,Borrow_time,Restore_time,Restore_state,Remark")] BorrowOrder borrowOrder)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Member,Borrow_time,Restore_time,Remark")] BorrowOrder borrowOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Stu_mail,Borrow_time,Restore_time,Restore_state,Remark")] BorrowOrder borrowOrder)
         {
             if (id != borrowOrder.Id)
             {

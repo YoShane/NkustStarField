@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EquipmentManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190608161626_Initial")]
+    [Migration("20190609071210_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,23 +29,16 @@ namespace EquipmentManagement.Migrations
 
                     b.Property<DateTime>("Borrow_time");
 
-                    b.Property<string>("Location_code");
-
-                    b.Property<int?>("MemberId");
-
                     b.Property<string>("Remark");
 
                     b.Property<bool>("Restore_state");
 
                     b.Property<DateTime>("Restore_time");
 
-                    b.Property<int>("Stu_mail");
+                    b.Property<string>("Stu_mail")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Location_code");
-
-                    b.HasIndex("MemberId");
 
                     b.ToTable("BorrowOrder");
                 });
@@ -312,17 +305,6 @@ namespace EquipmentManagement.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("EquipmentManagement.Models.BorrowOrder", b =>
-                {
-                    b.HasOne("EquipmentManagement.Models.Location")
-                        .WithMany("BorrowOrders")
-                        .HasForeignKey("Location_code");
-
-                    b.HasOne("EquipmentManagement.Models.Member", "Member")
-                        .WithMany("BorrowOrders")
-                        .HasForeignKey("MemberId");
-                });
-
             modelBuilder.Entity("EquipmentManagement.Models.BorrowRecord", b =>
                 {
                     b.HasOne("EquipmentManagement.Models.Equipment", "Equipment")
@@ -338,7 +320,7 @@ namespace EquipmentManagement.Migrations
             modelBuilder.Entity("EquipmentManagement.Models.Equipment", b =>
                 {
                     b.HasOne("EquipmentManagement.Models.Location", "Location")
-                        .WithMany()
+                        .WithMany("Equipment")
                         .HasForeignKey("Location_code")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

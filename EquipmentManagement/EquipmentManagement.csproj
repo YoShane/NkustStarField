@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Data\Migrations\**" />
+    <Compile Remove="Views\BorrowOrders\**" />
     <Content Remove="Data\Migrations\**" />
+    <Content Remove="Views\BorrowOrders\**" />
     <EmbeddedResource Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="Views\BorrowOrders\**" />
     <None Remove="Data\Migrations\**" />
+    <None Remove="Views\BorrowOrders\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -48,6 +48,23 @@ namespace EquipmentManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BorrowOrder",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Stu_mail = table.Column<string>(maxLength: 100, nullable: true),
+                    Borrow_time = table.Column<DateTime>(nullable: false),
+                    Restore_time = table.Column<DateTime>(nullable: false),
+                    Restore_state = table.Column<bool>(nullable: false),
+                    Remark = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BorrowOrder", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Location",
                 columns: table => new
                 {
@@ -212,37 +229,6 @@ namespace EquipmentManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BorrowOrder",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Stu_mail = table.Column<int>(nullable: false),
-                    Borrow_time = table.Column<DateTime>(nullable: false),
-                    Restore_time = table.Column<DateTime>(nullable: false),
-                    Restore_state = table.Column<bool>(nullable: false),
-                    Remark = table.Column<string>(nullable: true),
-                    MemberId = table.Column<int>(nullable: true),
-                    Location_code = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BorrowOrder", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BorrowOrder_Location_Location_code",
-                        column: x => x.Location_code,
-                        principalTable: "Location",
-                        principalColumn: "Location_code",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_BorrowOrder_Member_MemberId",
-                        column: x => x.MemberId,
-                        principalTable: "Member",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "BorrowRecord",
                 columns: table => new
                 {
@@ -309,16 +295,6 @@ namespace EquipmentManagement.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BorrowOrder_Location_code",
-                table: "BorrowOrder",
-                column: "Location_code");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BorrowOrder_MemberId",
-                table: "BorrowOrder",
-                column: "MemberId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BorrowRecord_Item_id",
                 table: "BorrowRecord",
                 column: "Item_id");
@@ -350,6 +326,9 @@ namespace EquipmentManagement.Migrations
                 name: "BorrowRecord");
 
             migrationBuilder.DropTable(
+                name: "Member");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -363,9 +342,6 @@ namespace EquipmentManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Location");
-
-            migrationBuilder.DropTable(
-                name: "Member");
         }
     }
 }

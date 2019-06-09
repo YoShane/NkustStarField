@@ -41,8 +41,5 @@ namespace EquipmentManagement.Models
         [Display(Name = "密碼"), StringLength(100, MinimumLength = 6)]
         public string Password { get; set; }
 
- 
-        public virtual ICollection<BorrowOrder> BorrowOrders { get; set; } //導覽至本身訂單
-
     }
 }
