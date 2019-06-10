@@ -12,6 +12,7 @@ namespace EquipmentManagement.Models
 
         [Display(Name = "學生信箱")]
         [EmailAddress, StringLength(100)]
+        [Required]
         [Editable(false)]
         public string Stu_mail { get; set; }
 

@@ -7,16 +7,19 @@
 <h1>訂單管理</h1>
 
 <p>
-    <a asp-action="Create">訂單新增</a>
+    <a asp-action="Create">訂單新增</a> | <a asp-area="" asp-controller="BorrowRecords" asp-action="Index">訂單登錄</a>
 </p>
-<table class="table">
+<table class="myTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Stu_mail)
+                訂單編號
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Borrow_time)
+                帳號
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Restore_time)
@@ -25,19 +28,29 @@
                 @Html.DisplayNameFor(model => model.Restore_state)
             </th>
             <th>
+                剩餘天數
+            </th>
+            <th>
+                訂單金額
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Remark)
             </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Stu_mail)
+                @Html.Raw(string.Format("{0:yyyyMMdd}{1:00}", item.Borrow_time, item.Id))
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Borrow_time)
+                @Html.Raw(item.Stu_mail.Split("@")[0])
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Restore_time)
@@ -46,17 +59,28 @@
                 @Html.DisplayFor(modelItem => item.Restore_state)
             </td>
             <td>
+                @if (item.Restore_time.Subtract(DateTime.Now).TotalDays > 0) {
+                    @Html.Raw(item.Restore_time.Subtract(DateTime.Now).TotalDays.ToString("0.0"))
+                } else {
+                    @Html.Raw("<a style=\"color:red\">逾期!</a>")
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Remark)
             </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">詳細明細</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
 
 
-    

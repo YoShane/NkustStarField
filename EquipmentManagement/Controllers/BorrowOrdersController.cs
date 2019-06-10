@@ -29,7 +29,47 @@ namespace borrowOrderManagement.Controllers
         // GET: BorrowOrders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BorrowOrder.ToListAsync());
+            List<BorrowOrder> borrowOrders = new List<BorrowOrder>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                //SqlDataReader
+                await connection.OpenAsync();
+                String sqlQuery = "SELECT * FROM dbo.BorrowOrder " +
+                            "inner join Member " +
+                            "on Member.Stu_mail = BorrowOrder.Stu_mail";
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync()) {
+                    while (await dataReader.ReadAsync()) {
+                        BorrowOrder borrowOrder = new BorrowOrder();
+                        Member member = new Member();
+                        borrowOrder.Id = Convert.ToInt32(dataReader["Id"]);
+                        borrowOrder.Stu_mail = Convert.ToString(dataReader["Stu_mail"]);
+                        borrowOrder.Borrow_time = Convert.ToDateTime(dataReader["Borrow_time"]);
+                        borrowOrder.Restore_time = Convert.ToDateTime(dataReader["Restore_time"]);
+                        borrowOrder.Restore_state = Convert.ToBoolean(dataReader["Restore_state"]);
+                        borrowOrder.Remark = Convert.ToString(dataReader["Remark"]);
+
+                        //讀價格
+                        sqlQuery = "SELECT * FROM dbo.BorrowRecord " +
+                                          $"WHERE Order_id = {borrowOrder.Id}";
+                        command = new SqlCommand(sqlQuery, connection);
+
+                        int totalPrice = 0;
+                        using (SqlDataReader dataReader2 = await command.ExecuteReaderAsync(CommandBehavior.SequentialAccess)) {
+                            while (await dataReader2.ReadAsync()) {
+                                totalPrice += Convert.ToInt32(dataReader2["Price"]);
+                            }
+                        }
+
+                        member.Name = Convert.ToString(dataReader["Name"]);
+                        member.Id = totalPrice; //把訂單價格寫進user id 方便!
+                        borrowOrder.Member = member;
+                        borrowOrders.Add(borrowOrder);
+                    }
+                }
+            }
+                return View(borrowOrders);
         }
 
         // GET: BorrowOrders/Details/5
@@ -110,6 +150,7 @@ namespace borrowOrderManagement.Controllers
         // POST: BorrowOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Stu_mail,Borrow_time,Restore_time,Restore_state,Remark")] BorrowOrder borrowOrder)
@@ -124,6 +165,7 @@ namespace borrowOrderManagement.Controllers
         }
 
         // GET: BorrowOrders/Edit/5
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -144,6 +186,7 @@ namespace borrowOrderManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Edit(int id, [Bind("Id,Stu_mail,Borrow_time,Restore_time,Restore_state,Remark")] BorrowOrder borrowOrder)
         {
             if (id != borrowOrder.Id)
@@ -175,6 +218,7 @@ namespace borrowOrderManagement.Controllers
         }
 
         // GET: BorrowOrders/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -195,6 +239,7 @@ namespace borrowOrderManagement.Controllers
         // POST: BorrowOrders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var borrowOrder = await _context.BorrowOrder.FindAsync(id);

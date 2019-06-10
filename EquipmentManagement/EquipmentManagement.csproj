@@ -64,6 +64,9 @@
     <Content Remove="Views\EquipmentsShow\Edit.cshtml" />
     <Content Remove="Views\Shared\_CookieConsentPartial.cshtml" />
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />
+    <Content Remove="Views\UserOrders\Create.cshtml" />
+    <Content Remove="Views\UserOrders\Delete.cshtml" />
+    <Content Remove="Views\UserOrders\Edit.cshtml" />
     <Content Remove="wwwroot\assets\js\login.js~RF1098532a.TMP" />
   </ItemGroup>
 

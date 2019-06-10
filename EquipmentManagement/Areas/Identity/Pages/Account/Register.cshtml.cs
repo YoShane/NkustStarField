@@ -109,7 +109,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
                    throw new Exception("roleManager null");
                }
 
-               IdentityResult IR = null;
+            /*  IdentityResult IR = null;
                foreach (var roleName in roleNames) {
                    //creating the roles and seeding them to the database
                    var roleExist = await _roleManager.RoleExistsAsync(roleName);
@@ -122,7 +122,7 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
                     await _userManager.AddToRoleAsync(user1, "Admin");
 
 
-                 /*  IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
+                   IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
                     await _userManager.AddToRoleAsync(user2, "Admin");
 
                     IdentityUser user3 = await _userManager.FindByEmailAsync("0624055@nkust.edu.tw");

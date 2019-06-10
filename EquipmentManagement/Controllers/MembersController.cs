@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EquipmentManagement.Data;
 using EquipmentManagement.Models;
@@ -51,7 +54,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Stu_mail,Phone,Name,Identity,Member_fee,CreateDate")] Member member)
+        public async Task<IActionResult> Create([Bind("Id,Stu_mail,Phone,Name,Hot_mail,Identity,Member_fee,CreateDate")] Member member)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +86,7 @@ namespace EquipmentManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Stu_mail,Phone,Name,Identity,Member_fee,CreateDate")] Member member)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Stu_mail,Phone,Name,Hot_mail,Identity,Member_fee,CreateDate")] Member member)
         {
             if (id != member.Id)
             {

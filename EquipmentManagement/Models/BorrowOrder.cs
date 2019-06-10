@@ -18,7 +18,7 @@ namespace EquipmentManagement.Models
         [Display(Name = "租借時間"), DataType(DataType.Date)]
         public DateTime Borrow_time { get; set; }
        
-        [Display(Name = "歸還時間"), DataType(DataType.Date)]
+        [Display(Name = "歸還期限"), DataType(DataType.Date)]
         public DateTime Restore_time { get; set; }
 
         [Display(Name = "已還裝備")]
