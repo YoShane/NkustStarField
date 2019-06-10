@@ -35,7 +35,7 @@ namespace borrowOrderManagement.Controllers
                 //SqlDataReader
                 await connection.OpenAsync();
                 String sqlQuery = "SELECT * FROM dbo.BorrowOrder " +
-                            "inner join Member " +
+                            "left outer join Member " +
                             "on Member.Stu_mail = BorrowOrder.Stu_mail";
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);

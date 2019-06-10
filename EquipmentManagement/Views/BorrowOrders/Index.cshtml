@@ -60,7 +60,7 @@
             </td>
             <td>
                 @if (item.Restore_time.Subtract(DateTime.Now).TotalDays > 0) {
-                    @Html.Raw(item.Restore_time.Subtract(DateTime.Now).TotalDays.ToString("0.0"))
+                    @Html.Raw(item.Restore_time.Subtract(DateTime.Now).TotalDays.ToString("0"))
                 } else {
                     @Html.Raw("<a style=\"color:red\">逾期!</a>")
                 }
