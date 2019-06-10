@@ -19,7 +19,6 @@ namespace EquipmentManagement.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly string connectionString;
-        public Location Location;
 
         public EquipmentsController(ApplicationDbContext context, IConfiguration configuration)
         {
@@ -30,8 +29,48 @@ namespace EquipmentManagement.Controllers
         // GET: Equipments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Equipment.ToListAsync());
+            List<Equipment> equipments = new List<Equipment>();
 
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                //SqlDataReader
+                await connection.OpenAsync();
+
+                String sqlQuery = "select (Quantity-total_lead) as Surplus,* from ("+
+                "select Equipment.Id, 0 as \"total_lead\"" +
+               "from Equipment where Id not in (select BorrowRecord.Item_id "+
+                "from BorrowRecord inner join BorrowOrder "+
+                "on BorrowRecord.Order_id = BorrowOrder.Id "+
+                "where BorrowOrder.Restore_state = 0 /* 排除沒還 */) union "+
+                "(select Item_id, SUM(Quantuty) as total_lead "+
+                "from BorrowRecord inner join BorrowOrder "+
+               "on BorrowRecord.Order_id = BorrowOrder.Id "+
+                "where BorrowOrder.Restore_state = 0 "+
+                "group by Item_id /* 找還沒還 */)) as adjTable "+
+                "inner join Equipment on Equipment.Id = adjTable.Id";
+
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync()) {
+                    while (await dataReader.ReadAsync()) {
+                        Equipment equipment = new Equipment();
+                        equipment.Id = Convert.ToInt32(dataReader["Id"]);
+                        equipment.Img = (byte[])dataReader["Img"];
+                        equipment.Name = Convert.ToString(dataReader["Name"]);
+                        equipment.Quantity = Convert.ToInt32(dataReader["Quantity"]);
+                        equipment.Price_non_member = Convert.ToInt32(dataReader["Price_non_member"]);
+                        equipment.Price_member = Convert.ToInt32(dataReader["Price_member"]);
+                        equipment.Source = Convert.ToString(dataReader["Source"]);
+                        equipment.Special = Convert.ToBoolean(dataReader["Special"]);
+                        equipment.Period_time = Convert.ToDateTime(dataReader["Period_time"]);
+                        equipment.Location_code = Convert.ToString(dataReader["Location_code"]);
+                        equipment.Surplus = Convert.ToInt32(dataReader["Surplus"]);
+
+                        equipments.Add(equipment);
+                    }
+                }
+
+            }
+            return View(equipments);
         }
 
         // GET: Equipments/Details/5
@@ -143,6 +182,9 @@ namespace EquipmentManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                if (equipment.Source == null) {
+                    equipment.Source = "''"; //補符號
+                }
                 int tmpBit = 0;
                 if (equipment.Special) tmpBit = 1;
                 try
@@ -160,7 +202,7 @@ namespace EquipmentManagement.Controllers
                             equipment.Img = p1;
                         }
                         String sqlQuery = $"UPDATE dbo.Equipment SET Img = @img, Period_time = @d," +
-$" Name = @name, Source = @source, Location_code = @code, Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
+$" Name = @name, Source =  @source, Location_code = @code, Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
 
                         using (SqlConnection connection = new SqlConnection(connectionString)) {
 
@@ -168,10 +210,9 @@ $" Name = @name, Source = @source, Location_code = @code, Quantity = {equipment.
                                 await connection.OpenAsync();
                                 command.Parameters.Add("@d", SqlDbType.DateTime2).Value = equipment.Period_time;
                                 command.Parameters.Add("@img", SqlDbType.Binary).Value = equipment.Img;
-
                                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = equipment.Name;
-                                command.Parameters.Add("@source", SqlDbType.NVarChar).Value = equipment.Source;
                                 command.Parameters.Add("@code", SqlDbType.NVarChar).Value = equipment.Location_code;
+                                command.Parameters.Add("@source", SqlDbType.NVarChar).Value = equipment.Source;
 
                                 try {
                                     await command.ExecuteNonQueryAsync();
@@ -184,7 +225,7 @@ $" Name = @name, Source = @source, Location_code = @code, Quantity = {equipment.
                         }
                     } else {
                         String sqlQuery = $"UPDATE dbo.Equipment SET Name = @name, Period_time = @d," +
-                    $" Source = @source, Location_code = @code, Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
+                    $" Source =  @source, Location_code = @code, Quantity = {equipment.Quantity}, Price_non_member = {equipment.Price_non_member}, Price_member = {equipment.Price_member}, Special = {tmpBit} WHERE Id = {id}";
 
                         using (SqlConnection connection = new SqlConnection(connectionString)) {
 
@@ -192,8 +233,8 @@ $" Name = @name, Source = @source, Location_code = @code, Quantity = {equipment.
                                 await connection.OpenAsync();
                                 command.Parameters.Add("@d", SqlDbType.DateTime2).Value = equipment.Period_time;
                                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = equipment.Name;
-                                command.Parameters.Add("@source", SqlDbType.NVarChar).Value = equipment.Source;
                                 command.Parameters.Add("@code", SqlDbType.NVarChar).Value = equipment.Location_code;
+                                command.Parameters.Add("@source", SqlDbType.NVarChar).Value = equipment.Source;
 
                                 try {
                                     await command.ExecuteNonQueryAsync();

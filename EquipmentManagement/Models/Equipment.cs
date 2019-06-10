@@ -20,7 +20,7 @@ namespace EquipmentManagement.Models
 
         [Required]
         [Range(1, Int64.MaxValue, ErrorMessage = "數量格式不合法")]
-        [Display(Name = "數量")]
+        [Display(Name = "總數")]
         public int Quantity { get; set; }
 
         [Required]
@@ -55,7 +55,7 @@ namespace EquipmentManagement.Models
         public List<string> ListValue { get; set; }
 
         [NotMapped]
-        [Display(Name = "剩餘數量")]
+        [Display(Name = "剩餘")]
         public int Surplus { get; set; }
     }
 }

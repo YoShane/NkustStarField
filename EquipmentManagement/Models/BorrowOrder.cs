@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EquipmentManagement.Models
 {
@@ -24,6 +26,12 @@ namespace EquipmentManagement.Models
 
         [Display(Name = "備註")]
         public string Remark { get; set; }
+
+        [NotMapped]
+        public List<BorrowRecord> BorrowRecords { get; set; }
+
+        [NotMapped]
+        public Member Member { get; set; }
 
     }
 }

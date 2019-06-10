@@ -4,71 +4,83 @@
     ViewData["Title"] = "器材新增";
 }
 
-<h1>@ViewData["Title"]</h1>
+@if (Model.List.Count != 0) {
 
-<h4>Equipment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" onfocus="this.value = '';" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price_member" class="control-label"></label>
-                <input asp-for="Price_member" class="form-control" onfocus="this.value = '';"/>
-                <span asp-validation-for="Price_member" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price_non_member" class="control-label"></label>
-                <input asp-for="Price_non_member" class="form-control" onclick="ready()" onfocus="this.value = '';" />
-                <span asp-validation-for="Price_non_member" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Source" class="control-label"></label>
-                <input asp-for="Source" class="form-control" />
-                <span asp-validation-for="Source" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Special" /> @Html.DisplayNameFor(model => model.Special)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Period_time" class="control-label"></label>
-                <input asp-for="Period_time" class="form-control" />
-                <span asp-validation-for="Period_time" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location_code" class="control-label"></label>
-                <select asp-for="Location_code">
-                    @for(int i = 0; i < Model.List.Count; i++) {
-                        <option value="@Html.Raw(Model.ListValue[i])">@Html.Raw(Model.List[i])</option>
-                    }
-                </select>
+    <h1>@ViewData["Title"]</h1>
 
-                <span asp-validation-for="Location_code" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Img" class="control-label"></label>
-                <input asp-for="Img" class="form-control" type="file" name="Image" style="padding-bottom:40px" />
-                <span asp-validation-for="Img" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Equipment</h4>
+    <hr />
+    <div class="row">
+
+        <div class="col-md-4">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" onfocus="this.value = '';" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price_member" class="control-label"></label>
+                    <input asp-for="Price_member" class="form-control" onfocus="this.value = '';" />
+                    <span asp-validation-for="Price_member" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price_non_member" class="control-label"></label>
+                    <input asp-for="Price_non_member" class="form-control" onclick="ready()" onfocus="this.value = '';" />
+                    <span asp-validation-for="Price_non_member" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Source" class="control-label"></label>
+                    <input asp-for="Source" class="form-control" />
+                    <span asp-validation-for="Source" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Special" /> @Html.DisplayNameFor(model => model.Special)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Period_time" class="control-label"></label>
+                    <input asp-for="Period_time" class="form-control" />
+                    <span asp-validation-for="Period_time" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Location_code" class="control-label"></label>
+                    <select asp-for="Location_code">
+                        @for (int i = 0; i < Model.List.Count; i++) {
+                            <option value="@Html.Raw(Model.ListValue[i])">@Html.Raw(Model.List[i])</option>
+                        }
+                    </select>
+
+                    <span asp-validation-for="Location_code" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Img" class="control-label"></label>
+                    <input asp-for="Img" class="form-control" type="file" name="Image" style="padding-bottom:40px" />
+                    <span asp-validation-for="Img" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+
+} else {
+    <h1>發生錯誤</h1>
+    <hr />
+    <h4 style="color:mediumvioletred">請先新增↓  <a class="nav-link text-dark" asp-area="" asp-controller="Locations" asp-action="Index">存放位置</a></h4>
+    <br>
+}
+
 
 <div>
     <a asp-action="Index">回到上一頁</a>
 </div>
+

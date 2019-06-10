@@ -8,13 +8,9 @@
 
   <ItemGroup>
     <Compile Remove="Data\Migrations\**" />
-    <Compile Remove="Views\BorrowOrders\**" />
     <Content Remove="Data\Migrations\**" />
-    <Content Remove="Views\BorrowOrders\**" />
     <EmbeddedResource Remove="Data\Migrations\**" />
-    <EmbeddedResource Remove="Views\BorrowOrders\**" />
     <None Remove="Data\Migrations\**" />
-    <None Remove="Views\BorrowOrders\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +58,10 @@
     <Content Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
     <Content Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
     <Content Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <Content Remove="Views\EquipmentsShow\Create.cshtml" />
+    <Content Remove="Views\EquipmentsShow\Delete.cshtml" />
+    <Content Remove="Views\EquipmentsShow\Details.cshtml" />
+    <Content Remove="Views\EquipmentsShow\Edit.cshtml" />
     <Content Remove="Views\Shared\_CookieConsentPartial.cshtml" />
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />
     <Content Remove="wwwroot\assets\js\login.js~RF1098532a.TMP" />
@@ -72,6 +72,16 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Views\BorrowOrders\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\reservation.html" />
   </ItemGroup>
 
 </Project>

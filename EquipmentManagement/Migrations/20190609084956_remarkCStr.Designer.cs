@@ -4,14 +4,16 @@ using EquipmentManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EquipmentManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190609084956_remarkCStr")]
+    partial class remarkCStr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,13 +46,9 @@ namespace EquipmentManagement.Migrations
 
             modelBuilder.Entity("EquipmentManagement.Models.BorrowRecord", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("Order_id");
 
                     b.Property<int?>("Item_id");
-
-                    b.Property<int>("Order_id");
 
                     b.Property<int>("Price");
 
@@ -58,11 +56,9 @@ namespace EquipmentManagement.Migrations
 
                     b.Property<string>("Remark");
 
-                    b.HasKey("id");
+                    b.HasKey("Order_id");
 
                     b.HasIndex("Item_id");
-
-                    b.HasIndex("Order_id");
 
                     b.ToTable("BorrowRecord");
                 });

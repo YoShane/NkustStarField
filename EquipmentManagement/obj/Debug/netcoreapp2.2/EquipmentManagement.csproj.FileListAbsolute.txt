@@ -66,3 +66,11 @@ C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\net
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Locations\Edit.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Locations\Index.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\Locations\_Layout.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Create.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Delete.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Details.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Edit.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\Index.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowOrders\_Layout.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\EquipmentsShow\Index.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\EquipmentsShow\_Layout.g.cshtml.cs

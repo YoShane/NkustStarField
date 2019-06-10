@@ -10,6 +10,8 @@ namespace EquipmentManagement.Models
     public class BorrowRecord
     {
         [Key]
+        public int id { get; set; }
+
         [Display(Name = "訂單編號")]
         public int Order_id { get; set; }
 
@@ -23,7 +25,7 @@ namespace EquipmentManagement.Models
         public int Price { get; set; }
 
         [Display(Name = "備註")]
-        public int Remark { get; set; }
+        public string Remark { get; set; }
 
         [ForeignKey("Order_id")]
         public virtual BorrowOrder BorrowOrder { get; set; } //存在訂單才存在(連鎖反應) 

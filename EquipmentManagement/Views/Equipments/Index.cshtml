@@ -6,25 +6,21 @@
     <main role="main" class="pb-1">
         <h1>登山社器材</h1>
         <p>
-            <a asp-action="Create">新增器材</a>
+            <a asp-action="Create">新增器材</a> | 
+                <a  asp-controller="Locations" asp-action="Index">存放設定</a>
         </p>
 
-        <form>
-            <p align="right">
-                <select>
-                    <option value="">All</option>
-                </select>
-
-               搜尋: <input type="text" >
-                <input type="submit" value="Filter" />
-            </p>
-        </form>
-
-        <table class="table">
+        <table class="myTable">
             <thead>
                 <tr>
                     <th colspan="2">
                         @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Surplus)
+                    </th>
+                    <th>
+                        已借
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Quantity)
@@ -36,42 +32,51 @@
                         @Html.DisplayNameFor(model => model.Price_member)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Period_time)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Location_code)
                     </th>
                 </tr>
             </thead>
             <tbody>
+
+                <!-- style="background-color:rgb(249, 148, 156)" -->
                 @foreach (var item in Model) {
-                    <tr>
-                        <td>
-                                @if (item.Img != null) {
+                    var style = "";
+                    if (item.Surplus == 0) {
+                        style = "color:red";
+                    } else if(item.Quantity-item.Surplus>0) {
+                        style = "color:green";
+                    }
+                <tr>
+                    <td>
+                        @if (item.Img != null) {
                             <a asp-action="Details" asp-route-id="@item.Id">
                                 <img src="data:image/png;base64,@(Convert.ToBase64String(item.Img)) " width="50" class="img-thumbnail " />
                             </a>
-                            }
-                        </td>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Name)  </a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price_non_member)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price_member)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Period_time)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Location_code)
-                        </td>
-                    </tr>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Name)  </a>
+                    </td>
+                    <td style="@style">
+                        @Html.DisplayFor(modelItem => item.Surplus)
+                    </td>
+                    <td>
+                        @Html.Raw(Convert.ToString(item.Quantity - item.Surplus))
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price_non_member)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price_member)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location_code)
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

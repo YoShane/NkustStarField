@@ -1,0 +1,141 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="zxx">
+
+<head>
+	<title>時間預約租借系統</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="keywords" content="" />
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- Meta tag Keywords -->
+	<!-- css files -->
+	<link rel="stylesheet" href="css/style2.css" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link rel="stylesheet" href="~/css/fontawesome-all.css">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //css files -->
+	<!-- web-fonts -->
+	<link href="http://maxcdn.bootstrapcdn.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i"
+		rel="stylesheet">
+	<link href="http://maxcdn.bootstrapcdn.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+		rel="stylesheet">
+	<!-- //web-fonts -->
+</head>
+
+<body onload="ready()">
+	<!-- bg effect -->
+	<div id="bg">
+		<canvas></canvas>
+		<canvas></canvas>
+		<canvas></canvas>
+	</div>
+	<!-- //bg effect -->
+	<!-- title -->
+	<h1>時間預約租借系統</h1>
+	<!-- //title -->
+	<!-- content -->
+	<div class="sub-main-w3">
+		<form action="#" onsubmit="cheakTool()" method="post">
+
+
+			<div class="form-style-agile">
+				<label>
+					姓名
+				</label>
+				<input placeholder="" name="Name" type="text" required="" id=uname>
+			</div>
+			<div class="form-style-agile">
+				<label>
+				手機
+				</label>
+				<input placeholder="" name="Name" type="text" required="" id=uname>
+				<label>
+					信箱
+				</label>
+				
+				<input type="text" id=otherbrrrowtime onfocus="this.value = '';" ">
+
+			</div>
+			<div class=" form-style-agile">
+				<label>
+				日期
+				</label>
+                <input placeholder="" id="datetime" type="date" required="">
+
+			</div>
+			<div class=" form-style-agile">
+				<label>
+				時間
+                </label>
+                <select onchange="changetime()" id="changetime1">
+                        <option  disabled=disabled selected=selected>請選擇方便的下課時間或是直接往下調時間</option>
+                        <option value="1">第一節下課</option>
+                        <option value="2">第二節下課</option>
+                        <option value="3">第三節下課</option>
+                        <option value="4">第四節下課</option>
+                        <option value="0">中午</option>
+                        <option value="5">第五節下課</option>
+                        <option value="6">第六節下課</option>
+                        <option value="7">第七節下課</option>
+                        <option value="8">第八節下課</option>
+                        <option value="10">第九節下課</option>
+
+
+                    </select>
+				<input placeholder="" id="time" type="time" required="" id=time>
+
+			</div>
+			<div class="form-style-agile">
+				<label>
+					<i class="fas fa-tools"></i>
+					註備
+				</label>
+				
+				<input type="text" id=sday >
+
+			</div>
+
+			<!-- checkbox -->
+			<div class="wthree-text">
+				<ul>
+
+					<li>
+						<a href="#" onclick="history.go(-1)">返回首頁</a>
+					</li>
+				</ul>
+			</div>
+			<!-- //checkbox -->
+			<input type="submit" value="送出" onclick="alert('預約成功!')">
+
+		</form>
+
+	</div>
+	<!-- //content -->
+
+	<!-- copyright -->
+	<div class="footer">
+	</div>
+	<!-- //copyright -->
+
+
+	<!-- Jquery -->
+	<script src="~/assets/js/jquery-3.3.1.min.js"></script>
+	<!-- //Jquery -->
+
+	<!-- effect js -->
+	<!-- <script src="assets/js/canva_moving_effect.js"></script> -->
+	<!-- //effect js -->
+	<script src="~/assets/js/reservation.js"></script>
+</body>
+
+</html>

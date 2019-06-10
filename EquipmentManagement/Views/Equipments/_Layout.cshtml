@@ -3,6 +3,7 @@
 }
 @section CSS {
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/assets/css/jquery.dataTables.min.css" />
     @RenderSection("CSS", required: false)
 }
 <div class="page-wrap">
@@ -20,5 +21,15 @@
 </div>
 @section Scripts {
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/assets/js/jquery.dataTables.min.js"></script>"
+    <script>
+        $(".myTable").DataTable({
+            // 參數設定[註1]
+            "bPaginate": true, // 顯示換頁
+            "searching": true, // 顯示搜尋
+            "info": false, // 顯示資訊
+            "fixedHeader": true, // 標題置頂
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 }
