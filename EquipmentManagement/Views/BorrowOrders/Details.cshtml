@@ -99,7 +99,17 @@
                                 <td style="font-size: 24px; font-weight:bold;">備註： @Html.DisplayFor(model => model.Remark)</td>
                             </tr>
                             <tr>
-                                <td style="font-size: 24px; font-weight:bold; text-align:left;">租借剩餘期限：@Html.Raw(Model.Restore_time.Subtract(DateTime.Now).TotalDays.ToString("0"))天</td>
+                                <td style="font-size: 24px; font-weight:bold; text-align:left;">
+                                    租借剩餘期限：
+                                    @if (Model.Restore_time.Subtract(DateTime.Now).TotalDays > 0) {
+                                        @Html.Raw(Model.Restore_time.Subtract(DateTime.Now).TotalDays.ToString("0") + "天");
+                                    } else if (Model.Restore_state) {
+                                        @Html.Raw("<a style=\"color:purple\">已歸還</a>")
+                                    } else {
+                                        @Html.Raw("<a style=\"color:red\">已逾期! 請盡速歸還</a>")
+                                    }
+
+                                </td>
                             </tr>
                         </tbody>
                     </table>

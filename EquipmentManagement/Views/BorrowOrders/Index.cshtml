@@ -25,9 +25,6 @@
                 @Html.DisplayNameFor(model => model.Restore_time)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Restore_state)
-            </th>
-            <th>
                 剩餘天數
             </th>
             <th>
@@ -42,45 +39,42 @@
     </thead>
     <tbody>
         @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.Raw(string.Format("{0:yyyyMMdd}{1:00}", item.Borrow_time, item.Id))
-            </td>
-            <td>
-                @Html.Raw(item.Stu_mail.Split("@")[0])
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Restore_time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Restore_state)
-            </td>
-            <td>
-                @if (item.Restore_time.Subtract(DateTime.Now).TotalDays > 0) {
-                    @Html.Raw(item.Restore_time.Subtract(DateTime.Now).TotalDays.ToString("0"))
-                } else {
-                    @Html.Raw("<a style=\"color:red\">逾期!</a>")
-                }
+            <tr>
+                <td>
+                    @Html.Raw(string.Format("{0:yyyyMMdd}{1:00}", item.Borrow_time, item.Id))
+                </td>
+                <td>
+                    @Html.Raw(item.Stu_mail.Split("@")[0])
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restore_time)
+                </td>
+                <td>
+                    @if (item.Restore_time.Subtract(DateTime.Now).TotalDays > 0 && !item.Restore_state) {
+                        @Html.Raw(item.Restore_time.Subtract(DateTime.Now).TotalDays.ToString("0"))
+                    } else if (item.Restore_state) {
+                        @Html.Raw("<a style=\"color:purple\">已歸還</a>")
+                    } else {
+                        @Html.Raw("<a style=\"color:red\">逾期!</a>")
+                    }
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remark)
-            </td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remark)
+                </td>
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">詳細明細</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
-            </td>
-        </tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">編輯</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">詳細明細</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">刪除</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
-
-

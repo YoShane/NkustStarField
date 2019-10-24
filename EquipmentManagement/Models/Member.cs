@@ -13,7 +13,6 @@ namespace EquipmentManagement.Models
         [Display(Name = "學生信箱")]
         [EmailAddress, StringLength(100)]
         [Required]
-        [Editable(false)]
         public string Stu_mail { get; set; }
 
         [Display(Name = "手機號碼"), StringLength(20, MinimumLength = 10)]

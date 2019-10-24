@@ -36,7 +36,8 @@ namespace borrowOrderManagement.Controllers
                 await connection.OpenAsync();
                 String sqlQuery = "SELECT * FROM dbo.BorrowOrder " +
                             "left outer join Member " +
-                            "on Member.Stu_mail = BorrowOrder.Stu_mail";
+                            "on Member.Stu_mail = BorrowOrder.Stu_mail " +
+                            "ORDER BY BorrowOrder.Id DESC;";
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
                 using (SqlDataReader dataReader = await command.ExecuteReaderAsync()) {
@@ -63,6 +64,7 @@ namespace borrowOrderManagement.Controllers
                         }
 
                         member.Name = Convert.ToString(dataReader["Name"]);
+                        if (member.Name.Equals("")) member.Name = "尚未註冊";
                         member.Id = totalPrice; //把訂單價格寫進user id 方便!
                         borrowOrder.Member = member;
                         borrowOrders.Add(borrowOrder);
@@ -88,7 +90,7 @@ namespace borrowOrderManagement.Controllers
                 //SqlDataReader
                 await connection.OpenAsync();
                 String sqlQuery = $"SELECT * FROM dbo.BorrowOrder "+
-                            "inner join Member "+
+                            "left  join Member " +
                             "on Member.Stu_mail = BorrowOrder.Stu_mail "+
                             $"WHERE BorrowOrder.Id = {id}";
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
@@ -102,10 +104,16 @@ namespace borrowOrderManagement.Controllers
                         borrowOrder.Restore_time = Convert.ToDateTime(dataReader["Restore_time"]);
                         borrowOrder.Restore_state = Convert.ToBoolean(dataReader["Restore_state"]);
                         borrowOrder.Remark = Convert.ToString(dataReader["Remark"]);
-
-                        member.Name = Convert.ToString(dataReader["Name"]);
-                        member.Hot_mail = Convert.ToString(dataReader["Hot_mail"]);
-                        member.Member_fee = Convert.ToBoolean(dataReader["Member_fee"]);
+                        try {
+                            member.Name = Convert.ToString(dataReader["Name"]);
+                            member.Hot_mail = Convert.ToString(dataReader["Hot_mail"]);
+                            member.Member_fee = Convert.ToBoolean(dataReader["Member_fee"]);
+                        }
+                        catch {
+                            member.Name = "尚未註冊";
+                            member.Hot_mail = "尚未註冊";
+                            member.Member_fee = false; //null無法轉布林
+                        }
                     }
                 }
                 

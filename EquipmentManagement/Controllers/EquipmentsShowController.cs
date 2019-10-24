@@ -9,17 +9,25 @@ using EquipmentManagement.Data;
 using EquipmentManagement.Models;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Identity;
 
 namespace EquipmentManagement.Controllers
 {
     public class EquipmentsShowController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly string connectionString;
 
-        public EquipmentsShowController(ApplicationDbContext context, IConfiguration configuration)
+        public EquipmentsShowController(ApplicationDbContext context,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            IConfiguration configuration)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
             this.connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
@@ -27,6 +35,7 @@ namespace EquipmentManagement.Controllers
         public async Task<IActionResult> Index()
         {
             List<Equipment> equipments = new List<Equipment>();
+            bool member_fee = false;
 
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 //SqlDataReader
@@ -63,9 +72,29 @@ namespace EquipmentManagement.Controllers
                         equipments.Add(equipment);
                     }
                 }
-
             }
-            return View(equipments);
+
+            if (_signInManager.IsSignedIn(User)) { //取得是否繳交社費
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null) {
+                    return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                }
+
+                using (SqlConnection connection = new SqlConnection(connectionString)) {
+                    await connection.OpenAsync();
+                    String sqlQuery = $"SELECT Member_fee FROM dbo.Member WHERE Stu_mail = '{user.UserName}'";
+                    SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+                    using (SqlDataReader dataReader = await command.ExecuteReaderAsync()) {
+                        if (dataReader.HasRows) {
+                            dataReader.Read();
+                            member_fee = Convert.ToBoolean(dataReader["Member_fee"]);
+                            }
+                    }
+                }
+            }
+               ViewBag.isMember = member_fee;
+                return View(equipments);
         }
 
     }

@@ -22,7 +22,7 @@ namespace EquipmentManagement.Controllers
         // GET: BorrowRecords
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.BorrowRecord.Include(b => b.BorrowOrder).Include(b => b.Equipment);
+            var applicationDbContext = _context.BorrowRecord.Include(b => b.BorrowOrder).Include(b => b.Equipment).OrderByDescending(b => b.BorrowOrder.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +37,7 @@ namespace EquipmentManagement.Controllers
             var borrowRecord = await _context.BorrowRecord
                 .Include(b => b.BorrowOrder)
                 .Include(b => b.Equipment)
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.id == id) ;
             if (borrowRecord == null)
             {
                 return NotFound();
