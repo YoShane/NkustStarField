@@ -17,6 +17,18 @@
                         @Html.DisplayFor(model => model.Name)
                     </dd>
                     <dt class="col-sm-2">
+                        已被借出數量
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.Raw(Model.Quantity-Model.Surplus)
+                    </dd>
+                    <dt class="col-sm-2">
+                        剩餘數量
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Surplus)
+                    </dd>
+                    <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.Quantity)
                     </dt>
                     <dd class="col-sm-10">

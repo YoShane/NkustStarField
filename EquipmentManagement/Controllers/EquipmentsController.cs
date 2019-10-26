@@ -91,19 +91,19 @@ namespace EquipmentManagement.Controllers
                 //SqlDataReader
                 await connection.OpenAsync();
 
-                String sqlQuery = "select (Quantity-total_lead) as Surplus,[Location].[Name] as tmpName,* from (" +
-               "select Equipment.Id, 0 as \"total_lead\"" +
-              "from Equipment where Id not in (select BorrowRecord.Item_id " +
-               "from BorrowRecord inner join BorrowOrder " +
-               "on BorrowRecord.Order_id = BorrowOrder.Id " +
-               "where BorrowOrder.Restore_state = 0 /* 排除沒還 */) union " +
-               "(select Item_id, SUM(Quantuty) as total_lead " +
-               "from BorrowRecord inner join BorrowOrder " +
-              "on BorrowRecord.Order_id = BorrowOrder.Id " +
-               "where BorrowOrder.Restore_state = 0 " +
-               "group by Item_id /* 找還沒還 */)) as adjTable " +
-               "inner join Equipment on Equipment.Id = adjTable.Id " +
-               "inner join [Location] on [Location].Location_code = Equipment.Location_code";
+                String sqlQuery = "select (Quantity-total_lead) as Surplus,[Location].[Name] as tmpName,*  " +
+"from (select Equipment.Id, 0 as total_lead " +
+$"from Equipment where Id = {id} and Id not in (select BorrowRecord.Item_id " +
+"from BorrowRecord inner join BorrowOrder " +
+"on BorrowRecord.Order_id = BorrowOrder.Id " +
+"where BorrowOrder.Restore_state = 0/* 補回來 */) union " +
+"(select Item_id, SUM(Quantuty) as total_lead " +
+"from BorrowRecord inner join BorrowOrder " +
+"on BorrowRecord.Order_id = BorrowOrder.Id " +
+$"where BorrowOrder.Restore_state = 0 and Item_id = {id} " +
+"group by Item_id /* 找還沒還 */)) as adjTable " +
+"inner join Equipment on Equipment.Id = adjTable.id " +
+"inner join [Location] on [Location].Location_code = Equipment.Location_code";
 
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);

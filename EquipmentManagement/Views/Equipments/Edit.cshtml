@@ -70,7 +70,8 @@
             </div>
 
             <div>
-                <a asp-action="Index">回到上一頁</a>
+                <a asp-action="Index">回到上一頁</a> |
+                <a asp-action="Details" asp-route-id="@Model.Id">詳細資訊</a>
             </div>
 
 @section Scripts {
