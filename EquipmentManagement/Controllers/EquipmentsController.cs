@@ -54,7 +54,12 @@ namespace EquipmentManagement.Controllers
                     while (await dataReader.ReadAsync()) {
                         Equipment equipment = new Equipment();
                         equipment.Id = Convert.ToInt32(dataReader["Id"]);
-                        equipment.Img = (byte[])dataReader["Img"];
+                        try {
+                            equipment.Img = (byte[])dataReader["Img"];
+                        }
+                        catch {
+                            equipment.Img =null;
+                        }
                         equipment.Name = Convert.ToString(dataReader["Name"]);
                         equipment.Quantity = Convert.ToInt32(dataReader["Quantity"]);
                         equipment.Price_non_member = Convert.ToInt32(dataReader["Price_non_member"]);
