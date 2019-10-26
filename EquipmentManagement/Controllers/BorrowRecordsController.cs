@@ -22,7 +22,7 @@ namespace EquipmentManagement.Controllers
         // GET: BorrowRecords
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.BorrowRecord.Include(b => b.BorrowOrder).Include(b => b.Equipment).OrderByDescending(b => b.BorrowOrder.Id);
+            var applicationDbContext = _context.BorrowRecord.Include(b => b.BorrowOrder).Include(b => b.Equipment);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -49,7 +49,7 @@ namespace EquipmentManagement.Controllers
         // GET: BorrowRecords/Create
         public IActionResult Create()
         {
-            ViewData["Order_id"] = new SelectList(_context.BorrowOrder, "Id", "Id");
+            ViewData["Order_id"] = new SelectList(_context.BorrowOrder, "Id", "Id").Reverse();
             ViewData["Item_id"] = new SelectList(_context.Equipment, "Id", "Name");
 
             return View();
@@ -68,7 +68,7 @@ namespace EquipmentManagement.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Order_id"] = new SelectList(_context.BorrowOrder, "Id", "Id", borrowRecord.Order_id);
+            ViewData["Order_id"] = new SelectList(_context.BorrowOrder, "Id", "Id", borrowRecord.Order_id).Reverse();
             ViewData["Item_id"] = new SelectList(_context.Equipment, "Id", "Name", borrowRecord.Item_id);
             return View(borrowRecord);
         }

@@ -80,12 +80,45 @@ namespace EquipmentManagement.Controllers
             {
                 return NotFound();
             }
+            Equipment equipment = new Equipment();
 
-            var equipment = await _context.Equipment
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (equipment == null)
-            {
-                return NotFound();
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                //SqlDataReader
+                await connection.OpenAsync();
+
+                String sqlQuery = "select (Quantity-total_lead) as Surplus,[Location].[Name] as tmpName,* from (" +
+               "select Equipment.Id, 0 as \"total_lead\"" +
+              "from Equipment where Id not in (select BorrowRecord.Item_id " +
+               "from BorrowRecord inner join BorrowOrder " +
+               "on BorrowRecord.Order_id = BorrowOrder.Id " +
+               "where BorrowOrder.Restore_state = 0 /* 排除沒還 */) union " +
+               "(select Item_id, SUM(Quantuty) as total_lead " +
+               "from BorrowRecord inner join BorrowOrder " +
+              "on BorrowRecord.Order_id = BorrowOrder.Id " +
+               "where BorrowOrder.Restore_state = 0 " +
+               "group by Item_id /* 找還沒還 */)) as adjTable " +
+               "inner join Equipment on Equipment.Id = adjTable.Id " +
+               "inner join [Location] on [Location].Location_code = Equipment.Location_code";
+
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync()) {
+                    if (dataReader.HasRows) {
+                        dataReader.Read();
+                        equipment.Id = Convert.ToInt32(dataReader["Id"]);
+                        equipment.Img = (byte[])dataReader["Img"];
+                        equipment.Name = Convert.ToString(dataReader["Name"]);
+                        equipment.Quantity = Convert.ToInt32(dataReader["Quantity"]);
+                        equipment.Price_non_member = Convert.ToInt32(dataReader["Price_non_member"]);
+                        equipment.Price_member = Convert.ToInt32(dataReader["Price_member"]);
+                        equipment.Source = Convert.ToString(dataReader["Source"]);
+                        equipment.Special = Convert.ToBoolean(dataReader["Special"]);
+                        equipment.Period_time = Convert.ToDateTime(dataReader["Period_time"]); 
+                        equipment.Location_code = Convert.ToString(dataReader["tmpName"]);
+                        equipment.Surplus = Convert.ToInt32(dataReader["Surplus"]);
+                    }
+                }
+
             }
 
             return View(equipment);

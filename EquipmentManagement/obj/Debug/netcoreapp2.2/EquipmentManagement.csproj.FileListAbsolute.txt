@@ -83,3 +83,4 @@ C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\net
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowRecords\Edit.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowRecords\Index.g.cshtml.cs
 C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\BorrowRecords\_Layout.g.cshtml.cs
+C:\Users\shane\Documents\GitHub\NkustStarField\EquipmentManagement\obj\Debug\netcoreapp2.2\Razor\Views\EquipmentsShow\Details.g.cshtml.cs

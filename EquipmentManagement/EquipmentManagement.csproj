@@ -60,7 +60,6 @@
     <Content Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
     <Content Remove="Views\EquipmentsShow\Create.cshtml" />
     <Content Remove="Views\EquipmentsShow\Delete.cshtml" />
-    <Content Remove="Views\EquipmentsShow\Details.cshtml" />
     <Content Remove="Views\EquipmentsShow\Edit.cshtml" />
     <Content Remove="Views\Shared\_CookieConsentPartial.cshtml" />
     <Content Remove="Views\Shared\_LoginPartial.cshtml" />

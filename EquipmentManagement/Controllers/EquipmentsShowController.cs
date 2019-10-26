@@ -41,7 +41,7 @@ namespace EquipmentManagement.Controllers
                 //SqlDataReader
                 await connection.OpenAsync();
 
-                String sqlQuery = "select (Quantity-total_lead) as Surplus,[Location].[Name] as tmpName,* from (" +
+                String sqlQuery = "select (Quantity-total_lead) as Surplus, * from (" +
                 "select Equipment.Id, 0 as \"total_lead\"" +
                "from Equipment where Id not in (select BorrowRecord.Item_id " +
                 "from BorrowRecord inner join BorrowOrder " +
@@ -52,8 +52,7 @@ namespace EquipmentManagement.Controllers
                "on BorrowRecord.Order_id = BorrowOrder.Id " +
                 "where BorrowOrder.Restore_state = 0 " +
                 "group by Item_id /* 找還沒還 */)) as adjTable " +
-                "inner join Equipment on Equipment.Id = adjTable.Id " +
-                "inner join [Location] on [Location].Location_code = Equipment.Location_code";
+                "inner join Equipment on Equipment.Id = adjTable.Id";
 
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
@@ -67,7 +66,7 @@ namespace EquipmentManagement.Controllers
                         equipment.Price_non_member = Convert.ToInt32(dataReader["Price_non_member"]);
                         equipment.Price_member = Convert.ToInt32(dataReader["Price_member"]);
                         equipment.Surplus = Convert.ToInt32(dataReader["Surplus"]);
-                        equipment.Source = Convert.ToString(dataReader["tmpName"]);
+                        equipment.Source = Convert.ToString(dataReader["Location_code"]);
 
                         equipments.Add(equipment);
                     }
