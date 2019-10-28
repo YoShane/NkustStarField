@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EquipmentManagement.Controllers
 {
-    [Authorize(Roles = "Admin,Member")]
     public class UserOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -27,7 +27,7 @@ namespace EquipmentManagement.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Member.ToListAsync());
+            return View(await _context.Member.OrderByDescending(m => m.Identity).ThenBy(n => n.Id).ToListAsync());
         }
 
         // GET: Members/Details/5
@@ -104,6 +104,16 @@ namespace EquipmentManagement.Controllers
                 {
                     _context.Update(member);
                     await _context.SaveChangesAsync();
+                    //更新好，補上權限
+                    if (member.Identity.Equals("Admin")) {
+                        IdentityUser user = await _userManager.FindByEmailAsync(member.Stu_mail);
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                        await _userManager.RemoveFromRoleAsync(user, "Member");
+                    } else if (member.Identity.Equals("Member")) {
+                        IdentityUser user = await _userManager.FindByEmailAsync(member.Stu_mail);
+                        await _userManager.AddToRoleAsync(user, "Member");
+                        await _userManager.RemoveFromRoleAsync(user, "Admin");
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -112,14 +122,7 @@ namespace EquipmentManagement.Controllers
                         return NotFound();
                     }
                     else
-                    { //更新好，補上權限
-                        if (member.Identity.Equals("Admin")) {
-                            IdentityUser user = await _userManager.FindByEmailAsync(member.Stu_mail);
-                            await _userManager.AddToRoleAsync(user, "Admin");
-                        } else if (member.Identity.Equals("Member")) {
-                            IdentityUser user = await _userManager.FindByEmailAsync(member.Stu_mail);
-                            await _userManager.AddToRoleAsync(user, "Member");
-                        }
+                    { 
                             throw;
                     }
                 }

@@ -11,10 +11,10 @@
         <li>
             <a asp-area="" asp-controller="EquipmentsShow" asp-action="Index"><span class="fa fa-list"></span></a>
         </li>
-        <li>
-            <a asp-area="" asp-controller="UserOrders" asp-action="Index"><span class="fa fa-book"></span></a>
-        </li>
         @if (SignInManager.IsSignedIn(User)) {
+            <li>
+                <a asp-area="" asp-controller="UserOrders" asp-action="Index"><span class="fa fa-book"></span></a>
+            </li>
             <li>
                 <a asp-area="Identity" asp-page="/Account/Manage/Index"><span class="fa fa-folder-open-o"></span></a>
             </li>

@@ -105,31 +105,32 @@ namespace EquipmentManagement.Areas.Identity.Pages.Account
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                        string[] roleNames = { "Admin", "Member" };
+
                if (_roleManager == null) {
                    throw new Exception("roleManager null");
                }
 
-            /*  IdentityResult IR = null;
-               foreach (var roleName in roleNames) {
-                   //creating the roles and seeding them to the database
-                   var roleExist = await _roleManager.RoleExistsAsync(roleName);
-                   if (!roleExist) {
-                       IR = await _roleManager.CreateAsync(new IdentityRole(roleName));
-                   }
-               }
+                    /*  IdentityResult IR = null;
+                       foreach (var roleName in roleNames) {
+                           //creating the roles and seeding them to the database
+                           var roleExist = await _roleManager.RoleExistsAsync(roleName);
+                           if (!roleExist) {
+                               IR = await _roleManager.CreateAsync(new IdentityRole(roleName));
+                           }
+                       }
 
-                     IdentityUser user1 = await _userManager.FindByEmailAsync("0624011@nkust.edu.tw");
-                    await _userManager.AddToRoleAsync(user1, "Admin");
-
-
-                   IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
-                    await _userManager.AddToRoleAsync(user2, "Admin");
-
-                    IdentityUser user3 = await _userManager.FindByEmailAsync("0624055@nkust.edu.tw");
-                    await _userManager.AddToRoleAsync(user3, "Member");  */
+                             IdentityUser user1 = await _userManager.FindByEmailAsync("0624011@nkust.edu.tw");
+                            await _userManager.AddToRoleAsync(user1, "Admin");
 
 
-                    await _userManager.AddToRoleAsync(user, "Member"); //給角色權限 
+                           IdentityUser user2 = await _userManager.FindByEmailAsync("0624005@nkust.edu.tw");
+                            await _userManager.AddToRoleAsync(user2, "Admin");
+
+                            IdentityUser user3 = await _userManager.FindByEmailAsync("0624055@nkust.edu.tw");
+                            await _userManager.AddToRoleAsync(user3, "Member");  */
+
+                    IdentityUser grantUser = await _userManager.FindByEmailAsync(Input.Email);
+                    await _userManager.AddToRoleAsync(grantUser, "Member"); //給角色權限 
 
                     //建使用者表
                     using (SqlConnection connection = new SqlConnection(connectionString)) {
