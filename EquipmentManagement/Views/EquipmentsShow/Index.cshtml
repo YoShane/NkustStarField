@@ -7,14 +7,6 @@
     ViewData["Title"] = "裝備一覽";
 }
 
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">器材列表</h1>
-    </div>
-</section>
-
-<div class="container" style="min-height: 45em">
-    <main role="main" class="pb-1">
         <table class="myTable">
             <thead>
                 <tr>
@@ -22,10 +14,10 @@
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th>
-                        剩餘數量
+                        剩餘
                     </th>
                     <th>
-                        總數量
+                        總數
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Price_non_member)
@@ -48,11 +40,13 @@
                         style = "color:green";
                     }
                 <tr>
-                    <td>
+                    <td align="center">
                         @if (item.Img != null) {
-                            <img src="data:image/png;base64,@(Convert.ToBase64String(item.Img)) " width="50" class="img-thumbnail " />
-                        }
-                    </td>
+                            <div class="img-thumbnail">
+                                <img src="data:image/png;base64,@(Convert.ToBase64String(item.Img)) " width="50" />
+                               </div>
+                                }
+                        </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -74,5 +68,3 @@
                 }
             </tbody>
         </table>
-    </main>
-</div>

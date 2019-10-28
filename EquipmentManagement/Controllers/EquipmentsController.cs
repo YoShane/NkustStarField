@@ -12,9 +12,11 @@ using System.IO;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EquipmentManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EquipmentsController : Controller
     {
         private readonly ApplicationDbContext _context;

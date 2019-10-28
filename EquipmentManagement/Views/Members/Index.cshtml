@@ -30,9 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Member_fee)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -56,9 +53,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Member_fee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -6,18 +6,14 @@
 
 <h1>器材租借訂單</h1>
 
-
 <table class="myTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Restore_state)
+                歸還
             </th>
             <th>
                 訂單編號
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Borrow_time)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Restore_time)
@@ -26,7 +22,7 @@
                 租期
             </th>
             <th>
-                訂單金額
+                金額
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Remark)
@@ -36,14 +32,11 @@
     <tbody>
         @foreach (var item in Model) {
         <tr>
-            <td>
+            <td align="center">
                 @Html.DisplayFor(modelItem => item.Restore_state)
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">@Html.Raw(string.Format("{0:yyyyMMdd}{1:00}", item.Borrow_time, item.Id))</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Borrow_time)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Restore_time)

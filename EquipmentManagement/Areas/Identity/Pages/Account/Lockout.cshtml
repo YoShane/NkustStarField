@@ -4,7 +4,11 @@
     ViewData["Title"] = "Locked out";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">This account has been locked out, please try again later.</p>
-</header>
+<div class="container" style="padding: 25px 25px">
+    <main role="main" class="pb-1">
+        <h1>@ViewData["Title"] </h1>
+        <h4>密碼錯誤太多次，請隔半天後重試，或聯繫管理員 謝謝!<br>Email: shane871112@hotmail.com</h4>
+        <hr />
+        <a asp-area="" asp-controller="Home" asp-action="Index">按我回首頁<span class="fa fa-home"></span></a>
+    </main>
+</div>

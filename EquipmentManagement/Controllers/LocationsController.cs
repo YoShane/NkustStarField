@@ -10,9 +10,11 @@ using EquipmentManagement.Models;
 using System.Data.SqlClient;
 using System.Data;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EquipmentManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LocationsController : Controller
     {
         private readonly ApplicationDbContext _context;

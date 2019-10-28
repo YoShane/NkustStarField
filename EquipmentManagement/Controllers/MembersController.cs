@@ -7,15 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EquipmentManagement.Data;
 using EquipmentManagement.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace EquipmentManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MembersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public MembersController(ApplicationDbContext context)
+        public MembersController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -107,8 +112,15 @@ namespace EquipmentManagement.Controllers
                         return NotFound();
                     }
                     else
-                    {
-                        throw;
+                    { //更新好，補上權限
+                        if (member.Identity.Equals("Admin")) {
+                            IdentityUser user = await _userManager.FindByEmailAsync(member.Stu_mail);
+                            await _userManager.AddToRoleAsync(user, "Admin");
+                        } else if (member.Identity.Equals("Member")) {
+                            IdentityUser user = await _userManager.FindByEmailAsync(member.Stu_mail);
+                            await _userManager.AddToRoleAsync(user, "Member");
+                        }
+                            throw;
                     }
                 }
                 return RedirectToAction(nameof(Index));

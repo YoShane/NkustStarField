@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EquipmentManagement.Data;
 using EquipmentManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EquipmentManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BorrowRecordsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -51,7 +53,6 @@ namespace EquipmentManagement.Controllers
         {
             ViewData["Order_id"] = new SelectList(_context.BorrowOrder, "Id", "Id").Reverse();
             ViewData["Item_id"] = new SelectList(_context.Equipment, "Id", "Name");
-
             return View();
         }
 

@@ -21,7 +21,7 @@ namespace EquipmentManagement.Models
         [Display(Name = "租借數量")]
         public int Quantuty { get; set; }
 
-        [Display(Name = "小計價格")]
+        [Display(Name = "總計價格")]
         public int Price { get; set; }
 
         [Display(Name = "備註")]
