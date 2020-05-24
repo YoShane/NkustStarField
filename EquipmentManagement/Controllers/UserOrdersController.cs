@@ -137,7 +137,11 @@ namespace EquipmentManagement.Controllers
                         borrowRecord.Remark = Convert.ToString(dataReader["Remark"]);
 
                         equipment.Id = Convert.ToInt32(dataReader["Id"]);
-                        equipment.Img = (byte[])dataReader["Img"];
+                        if (dataReader["Img"] != DBNull.Value) {
+                            equipment.Img = (byte[])dataReader["Img"];
+                        } else {
+                            equipment.Img = null;
+                        }
                         equipment.Name = Convert.ToString(dataReader["Name"]);
                         equipment.Price_non_member = Convert.ToInt32(dataReader["Price_non_member"]);
                         equipment.Price_member = Convert.ToInt32(dataReader["Price_member"]);

@@ -43,11 +43,15 @@ namespace EquipmentManagement.Controllers
 
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
-                using (SqlDataReader dataReader = await command.ExecuteReaderAsync(CommandBehavior.SequentialAccess)) {
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync()) {
                     while (await dataReader.ReadAsync()) {
                         Equipment equipment = new Equipment();
                         equipment.Id = Convert.ToInt32(dataReader["Id"]);
-                        equipment.Img = (byte[])dataReader["Img"];
+                        if(dataReader["Img"] != DBNull.Value) {
+                            equipment.Img = (byte[])dataReader["Img"];
+                        } else {
+                            equipment.Img = null;
+                        }
                         equipment.Name = Convert.ToString(dataReader["Name"]);
                         equipments.Add(equipment);
                     }

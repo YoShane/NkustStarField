@@ -67,9 +67,11 @@
                     totalPrice += item.Price;
                     <tr>
                         <td align="center">
+						@if(item.Equipment.Img != null) {
                             <div class="img-thumbnail">
                                 <img src="data:image/png;base64,@(Convert.ToBase64String(item.Equipment.Img)) " width="40">
                                 </div>
+								}
                         </td>
                         <td>@Html.Raw(item.Equipment.Name)</td>
                         <td>
